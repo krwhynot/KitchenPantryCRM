@@ -1,0 +1,33 @@
+# Git and tool-specific directories
+.git/
+.github/
+.claude/
+.taskmaster/
+
+# Dependencies
+/node_modules/
+/vendor/
+
+# Storage and cache
+/storage/
+/bootstrap/cache/
+/public/hot
+/public/storage
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Lock files
+composer.lock
+package-lock.json
+
+# Logs
+*.log
+
+# Documentation / Project Management
+BluePrint.md
+CLAUDE.md
+PRD.txt
+TODO.md

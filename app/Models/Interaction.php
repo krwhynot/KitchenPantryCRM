@@ -2,23 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Interaction extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
-    protected $fillable = [
-        'contact_id',
-        'type',
-        'interaction_date',
-        'notes',
-    ];
-
-    public function contact()
+    public function organization(): BelongsTo
     {
-        return $this->belongsTo(Contact::class);
+        return $this->belongsTo(Organization::class, 'organizationId');
+    }
+
+    public function contact(): BelongsTo
+    {
+        return $this->belongsTo(Contact::class, 'contactId');
     }
 }

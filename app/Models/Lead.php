@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Opportunity extends Model
+class Lead extends Model
 {
     use HasFactory, HasUuids;
 
@@ -16,8 +16,8 @@ class Opportunity extends Model
         return $this->belongsTo(Organization::class, 'organizationId');
     }
 
-    public function contact(): BelongsTo
+    public function assignedTo(): BelongsTo
     {
-        return $this->belongsTo(Contact::class, 'contactId');
+        return $this->belongsTo(User::class, 'assignedToId');
     }
 }

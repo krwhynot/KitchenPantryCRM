@@ -4,9 +4,10 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "concurrently \"php artisan serve\" \"vite\""
     },
     "devDependencies": {
+        "@defstudio/vite-livewire-plugin": "^2.0.6",
         "@tailwindcss/vite": "^4.0.0",
         "axios": "^1.8.2",
         "concurrently": "^9.0.1",

@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
-
 # Detailed Laravel Filament CRM Implementation Blueprint for Azure with PostgreSQL Support
 
 ## Phase 1: Environment Setup and Installation (Week 1)

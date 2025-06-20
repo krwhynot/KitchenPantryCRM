@@ -2,45 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Contact extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
-    protected $fillable = [
-        'organization_id',
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'title',
-    ];
-
-    public function organization()
+    public function organization(): BelongsTo
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
-    public function interactions()
+    public function interactions(): HasMany
     {
-        return $this->hasMany(Interaction::class);
+        return $this->hasMany(Interaction::class, 'contactId');
     }
 
-    public function opportunities()
+    public function opportunities(): HasMany
     {
-        return $this->hasMany(Opportunity::class);
+        return $this->hasMany(Opportunity::class, 'contactId');
     }
 
-    /**
-     * Get the contact's full name.
-     */
-    protected function fullName(): Attribute
+    public function contracts(): HasMany
     {
-        return Attribute::make(
-            get: fn () => $this->first_name . ' ' . $this->last_name,
-        );
+        return $this->hasMany(Contract::class, 'contactId');
     }
 }
