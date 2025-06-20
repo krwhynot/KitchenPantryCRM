@@ -1,0 +1,243 @@
+<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
+
+# write this as a prd.txt file:
+
+prd.txt
+
+---
+Kitchen Pantry CRM – Product Requirements Document (PRD)
+Date: June 20, 2025
+
+========================================================
+EXECUTIVE SUMMARY
+========================================================
+Kitchen Pantry CRM is a custom Customer Relationship Management system specifically designed for the food service industry. This system will replace an existing Excel-based workflow for a family company with 4 sales representatives, providing modern CRM capabilities tailored to food service sales operations.
+
+The system is engineered for industry-specific needs, targeting a strict budget of \$18/month Azure hosting costs while supporting 4 concurrent users.
+
+========================================================
+CORE TECHNOLOGIES
+========================================================
+Backend Framework: Laravel 10.x
+Frontend Framework: Filament PHP v3.3+ (Admin Panel)
+Database: PostgreSQL (v13+)
+Hosting: Azure App Service (Linux)
+Version Control: Git with GitHub
+
+Key Components:
+
+- Authentication: Laravel Breeze or Filament's built-in auth
+- Database ORM: Eloquent ORM
+- Frontend: Alpine.js, Tailwind CSS, Livewire (for reactive components)
+- Development Tools: Composer, PHP 8.2+, VS Code
+- CI/CD: GitHub Actions
+- Azure Services: App Service (Linux), Azure Database for PostgreSQL - Flexible Server, Azure Virtual Network (if applicable)
+- Testing: PHPUnit
+- Deployment: Azure App Service Deployment Center
+- Monitoring: Azure Monitor (to be configured)
+
+========================================================
+PROJECT GOALS \& OBJECTIVES
+========================================================
+Primary Goals:
+
+- Replace Excel-based customer tracking system
+- Accelerate data entry by 50% compared to Excel
+- Improve report generation speed by 80%
+- Achieve sub-second search performance
+- Enable multi-device access (Windows touch laptop primary)
+- Maintain 100% data migration accuracy from Excel
+
+Business Objectives:
+
+- Streamline sales process for food service industry
+- Improve customer relationship tracking and follow-up
+- Enable better sales pipeline visibility
+- Reduce administrative overhead
+- Support business growth within existing cost structure
+
+========================================================
+TARGET USERS
+========================================================
+
+- Primary: 4 Sales Representatives (daily users)
+- Secondary: Management (reporting and oversight)
+- User Personas:
+    - Food Service Sales Rep: Field-based, needs quick data entry, mobile access
+    - Sales Manager: Needs reporting, pipeline visibility, team oversight
+    - Executive: High-level reporting, ROI tracking
+
+========================================================
+
+1. INTRODUCTION
+========================================================
+1.1 Purpose
+
+- Define requirements for a CRM system tailored to food service sales professionals, enabling management of customer relationships, interactions, and pipeline optimization.
+
+1.2 Product Overview
+
+- Centralized platform for organizations, contacts, interactions, and reporting. Designed for efficient tracking, prioritization, and actionable insights.
+
+1.3 Scope
+
+- Initial release covers core CRM features for food service: organization/contact management, interaction tracking, pipeline management, and reporting.
+
+========================================================
+2. PRODUCT FEATURES AND REQUIREMENTS
+========================================================
+
+2.1 Dashboard (Home Page)
+
+- Personalized dashboard on login
+- High-priority tasks for the week
+- Recent interactions needing follow-up
+- Upcoming meetings or scheduled interactions
+- Quick view of A-priority organizations
+- Weekly goals and progress tracking
+- Clean navigation bar for Organizations, Contacts, Interactions, Reports
+
+2.2 Organization Management
+
+- CRUD for restaurants/food service businesses
+- Priority classification (A-D)
+- Market segment categorization (Fine Dining, Fast Food, Healthcare, Catering, Institutional)
+- Distributor tracking (Sysco, USF, PFG, Direct, Other)
+- Geographic info and contact details
+- Account manager assignment
+- Data grid with sort, filter, search (<1s response)
+- Organization profile: basic info, contacts, recent interactions, opportunities, notes
+- Prominent "Add New Organization" button
+
+2.3 Contact Management
+
+- Multiple contacts per organization
+- Role-based categorization (Executive Chef, Buyer, Manager, Owner, Kitchen Manager)
+- Contact info (phone, email, LinkedIn)
+- Position hierarchy
+- Contact interaction history
+- Searchable list, quick lookup
+- Contact profile: full info, org affiliation, interaction history, notes, direct links for new interactions
+
+2.4 Interaction Tracking
+
+- Six types: Email, Call, In Person, Demo/Sampled, Quoted Price, Follow-up
+- 30-second entry target
+- Date/time stamping
+- Opportunity linkage
+- Follow-up task creation
+- Interaction history by contact/org
+- Bulk entry capabilities
+- Calendar view, filters, quick templates
+
+2.5 Sales Pipeline Management
+
+- Five-stage process: Lead-Discovery, Contacted, Sampled/Visited, Follow-up, Close (Won/Lost)
+- Opportunity tracking, status updates
+- Revenue estimation (optional)
+- Close date projections
+- Loss reason tracking
+- Pipeline reports and analytics
+
+2.6 Principal/Brand Management
+
+- Support for 11 brands: Kaufholds, Frites Street, Better Balance, VAF, Ofk, Annasea, Wicks, RJC, Kayco, Abdale, Land Lovers
+- Product line association with opportunities
+- Brand-specific reporting
+
+2.7 Reporting System
+
+- Four core reports (<10s generation): Weekly Priority Updates, Account Manager Activity, Pipeline Status, Success Rate
+- Export to Excel, PDF
+- Custom date ranges, automated delivery, team sharing, custom templates
+
+2.8 Settings Management
+
+- Dynamic config for: priority levels (A-D, colors), market segments, distributor options, contact roles, interaction types, sales stages, brands, custom dropdowns
+
+2.9 Quick Add Menu
+
+- Accessible from any page (+ button)
+- Add organization, contact, interaction, schedule follow-up, create opportunity
+
+2.10 Search Functionality
+
+- Global search bar
+- Search organizations, contacts, interactions, notes, opportunities (<1s response)
+
+2.11 Profile and Settings
+
+- Update account info, notification preferences, dashboard layout, task list, personal goals/tracking
+
+========================================================
+3. NON-FUNCTIONAL REQUIREMENTS
+========================================================
+
+- Support at least 4 concurrent users
+- Page load <2 seconds
+- Database queries <1 second
+- Role-based access control
+- Secure storage/encryption of customer data
+- Compliance with data protection regulations
+- Intuitive, mobile-responsive, accessible interface
+- System uptime 99.9%
+- Regular backups, disaster recovery
+- Azure hosting budget: \$18/month
+
+========================================================
+4. TECHNICAL REQUIREMENTS
+========================================================
+
+- Web-based, mobile-responsive (Windows touch laptop primary)
+- Email/calendar integration
+- Data import/export (Excel, CSV, PDF)
+- Secure database, regular backups
+
+========================================================
+5. IMPLEMENTATION CONSIDERATIONS
+========================================================
+
+- Agile methodology
+- Stakeholder reviews
+- Iterative feature delivery
+- Comprehensive testing (UAT, performance, reliability)
+- Phased rollout, user training
+- Feedback mechanism
+
+========================================================
+6. TIMELINE AND MILESTONES
+========================================================
+
+- Phase 1: Dashboard, Organizations, Contacts
+- Phase 2: Interactions, Reports
+- Phase 3: Advanced features/integrations
+- Requirements approval: [Date]
+- Design completion: [Date]
+- Development completion: [Date]
+- Testing completion: [Date]
+- User training: [Date]
+- Launch: [Date]
+
+========================================================
+7. APPENDICES
+========================================================
+Glossary:
+
+- Organization: Customer/prospect company/entity
+- Contact: Individual within an organization
+- Interaction: Communication/meeting with a contact
+- Opportunity: Potential sale/business deal
+- Priority Level: Importance classification (A-D)
+
+Related Documents:
+
+- UI Design Specifications
+- Data Schema
+- API Documentation
+
+---
+
+<div style="text-align: center">⁂</div>
+
+[^1]: paste.txt
+
