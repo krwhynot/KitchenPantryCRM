@@ -27,7 +27,7 @@ This command creates a new Laravel project in a directory named "FoodService-CRM
 
 ### Filament Installation
 
-Install Filament using Composer and set up the admin panel:
+Install Filament using Composer and sets up the admin panel:
 
 ```bash
 composer require filament/filament:"^3.3" -W
