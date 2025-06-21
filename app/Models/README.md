@@ -8,6 +8,22 @@ Contains Eloquent models for the PantryCRM application, defining data structures
 ### Format: YYYY-MM-DD | filename | change_type | description
 
 ### Recent Changes
+- 2025-06-21 | Contact.php | ENHANCED | Added SoftDeletes trait for comprehensive contact delete management
+- 2025-06-21 | ContactResource.php | ENHANCED | Complete overhaul with 6-section organized forms, advanced filters, bulk actions, and soft deletes
+- 2025-06-21 | ContactExportAction.php | ADDED | Custom export action for contacts with JSON/CSV formats and comprehensive data
+- 2025-06-21 | ContactImportAction.php | ADDED | Advanced import action supporting JSON/CSV with conflict resolution and validation
+- 2025-06-21 | InteractionsRelationManager.php | ENHANCED | Enhanced relation manager with detailed forms, filters, and smart columns
+- 2025-06-21 | OpportunitiesRelationManager.php | ENHANCED | Enhanced relation manager for contact opportunities with advanced features
+- 2025-06-21 | Organization.php | ENHANCED | Added SoftDeletes trait for comprehensive delete management
+- 2025-06-21 | OrganizationResource.php | ENHANCED | Complete overhaul with advanced forms, filters, bulk actions, and soft deletes
+- 2025-06-21 | OrganizationExportAction.php | ADDED | Custom export action for organizations with comprehensive data
+- 2025-06-21 | OrganizationImportAction.php | ADDED | Advanced import action supporting JSON/CSV with conflict resolution
+- 2025-06-21 | SystemSetting.php | REFACTORED | Major enhancement with caching, type validation, and performance optimization
+- 2025-06-21 | SettingsExportAction.php | ADDED | Custom Filament action for JSON settings export with versioning
+- 2025-06-21 | SettingsImportAction.php | ADDED | Custom Filament action for settings import with conflict resolution
+- 2025-06-21 | CrmInteractionTypesSeeder.php | ENHANCED | Added environment-specific validation and comprehensive demo data
+- 2025-06-21 | CrmMarketSegmentsSeeder.php | ENHANCED | Added food service market segments with business intelligence
+- 2025-06-21 | CrmDistributorOptionsSeeder.php | ENHANCED | Added supply chain distributor options with operational details
 - 2025-06-21 | Principal.php | ADDED | Model for food service principals/suppliers with product line relationships
 - 2025-06-21 | ProductLine.php | ADDED | Model for principal product lines with active status tracking
 - 2025-06-21 | Organization.php | MODIFIED | Enhanced with priority labels, full address accessor, and comprehensive scopes

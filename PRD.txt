@@ -146,6 +146,7 @@ TARGET USERS
 - Brand-specific reporting
 
 2.7 Reporting System
+- Dynamic config for: priority levels (A-D, colors), market segments, distributor options, contact roles, interaction types, sales stages, brands, custom dropdowns
 
 - Four core reports (<10s generation): Weekly Priority Updates, Account Manager Activity, Pipeline Status, Success Rate
 - Export to Excel, PDF
@@ -153,7 +154,6 @@ TARGET USERS
 
 2.8 Settings Management
 
-- Dynamic config for: priority levels (A-D, colors), market segments, distributor options, contact roles, interaction types, sales stages, brands, custom dropdowns
 
 2.9 Quick Add Menu
 

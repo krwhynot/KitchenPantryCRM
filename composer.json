@@ -12,7 +12,8 @@
         "filament/filament": "*",
         "laravel/framework": "*",
         "laravel/tinker": "^2.10.1",
-        "livewire/livewire": "^3.6"
+        "livewire/livewire": "^3.6",
+        "spatie/laravel-activitylog": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -29,7 +30,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

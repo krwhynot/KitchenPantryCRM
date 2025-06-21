@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\CrmDefaultSettingsSeeder;
 use Database\Seeders\OrganizationSeeder;
 use Database\Seeders\ContactSeeder;
 use Database\Seeders\InteractionSeeder;
@@ -18,6 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            // Seed CRM configuration first
+            CrmDefaultSettingsSeeder::class,
+            
+            // Then seed actual data
             OrganizationSeeder::class,
             ContactSeeder::class,
             InteractionSeeder::class,
