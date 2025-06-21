@@ -23,15 +23,13 @@ class ContactFactory extends Factory
 
         return [
             'organization_id' => \App\Models\Organization::factory(),
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'name' => $firstName . ' ' . $lastName,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
-            'title' => fake()->randomElement($positions),
             'position' => fake()->randomElement($positions),
-            'priority' => fake()->randomElement($priorities),
-            'last_contact' => fake()->dateTimeBetween('-30 days', 'now'),
+            'isPrimary' => fake()->boolean(20), // 20% chance of being primary
+            'notes' => fake()->optional()->paragraph(),
         ];
     }
 }

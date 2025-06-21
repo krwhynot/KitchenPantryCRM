@@ -55,7 +55,10 @@
       "mcp__Context7__get-library-docs",
       "mcp__exa__web_search_exa",
       "Bash(git checkout:*)",
-      "Bash(COMPOSER_PROCESS_TIMEOUT=1800 composer install --prefer-dist --optimize-autoloader)"
+      "Bash(COMPOSER_PROCESS_TIMEOUT=1800 composer install --prefer-dist --optimize-autoloader)",
+      "Bash(mkdir:*)",
+      "mcp__filesystem__create_directory",
+      "mcp__filesystem__write_file"
     ]
   },
   "enabledMcpjsonServers": [

@@ -21,14 +21,12 @@ class InteractionFactory extends Factory
         $interactionDate = fake()->dateTimeBetween('-60 days', 'now');
 
         return [
+            'organization_id' => \App\Models\Organization::factory(),
             'contact_id' => \App\Models\Contact::factory(),
-            'organization_id' => function (array $attributes) {
-                return \App\Models\Contact::find($attributes['contact_id'])->organization_id;
-            },
+            'user_id' => \App\Models\User::factory(),
             'type' => fake()->randomElement($types),
-            'interaction_date' => $interactionDate,
+            'date' => $interactionDate,
             'notes' => fake()->paragraph(),
-            'outcome' => fake()->randomElement($outcomes),
         ];
     }
 }

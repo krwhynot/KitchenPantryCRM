@@ -65,6 +65,16 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Lead::class, 'assigned_to_id');
     }
 
+    public function interactions(): HasMany
+    {
+        return $this->hasMany(Interaction::class);
+    }
+
+    public function opportunities(): HasMany
+    {
+        return $this->hasMany(Opportunity::class);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return true; // For development - allow all users to access admin panel

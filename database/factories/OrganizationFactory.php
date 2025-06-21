@@ -23,19 +23,23 @@ class OrganizationFactory extends Factory
 
         return [
             'name' => fake()->company(),
+            'priority' => fake()->randomElement(['A', 'B', 'C', 'D']),
+            'segment' => fake()->randomElement(['FINEDINING', 'FASTFOOD', 'HEALTHCARE', 'EDUCATION']),
+            'type' => fake()->randomElement(['PROSPECT', 'CUSTOMER', 'LEAD']),
             'address' => fake()->streetAddress(),
             'city' => fake()->city(),
             'state' => fake()->stateAbbr(),
-            'zip_code' => fake()->postcode(),
+            'zipCode' => fake()->postcode(),
             'phone' => fake()->phoneNumber(),
+            'email' => fake()->companyEmail(),
             'website' => fake()->domainName(),
             'notes' => fake()->paragraph(),
-            'segment' => fake()->randomElement($segments),
-            'distributor' => fake()->randomElement($distributors),
-            'account_manager' => fake()->randomElement($accountManagers),
-            'priority' => fake()->randomElement($priorities),
-            'last_contact' => fake()->dateTimeBetween('-30 days', 'now'),
-            'is_active' => true,
+            'estimatedRevenue' => fake()->randomFloat(2, 10000, 500000),
+            'employeeCount' => fake()->numberBetween(5, 500),
+            'primaryContact' => fake()->name(),
+            'lastContactDate' => fake()->optional()->dateTimeBetween('-30 days', 'now'),
+            'nextFollowUpDate' => fake()->optional()->dateTimeBetween('now', '+30 days'),
+            'status' => fake()->randomElement(['ACTIVE', 'INACTIVE', 'PENDING']),
         ];
     }
 }

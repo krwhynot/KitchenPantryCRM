@@ -12,7 +12,16 @@ class Contact extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'organization_id',
+        'firstName',
+        'lastName',
+        'email',
+        'phone',
+        'position',
+        'isPrimary',
+        'notes',
+    ];
 
     protected function casts(): array 
     {
@@ -39,5 +48,56 @@ class Contact extends Model
     public function contracts(): HasMany
     {
         return $this->hasMany(Contract::class, 'contact_id');
+    }
+
+    public function scopePrimary($query)
+    {
+        return $query->where('isPrimary', true);
+    }
+
+    public function scopeForOrganization($query, $organizationId)
+    {
+        return $query->where('organization_id', $organizationId);
+    }
+
+    public function scopeWithEmail($query)
+    {
+        return $query->whereNotNull('email');
+    }
+
+    public function scopeWithPhone($query)
+    {
+        return $query->whereNotNull('phone');
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return trim($this->firstName . ' ' . $this->lastName);
+    }
+
+    public function getDisplayNameAttribute(): string
+    {
+        $name = $this->full_name;
+        if ($this->position) {
+            $name .= ' (' . $this->position . ')';
+        }
+        return $name;
+    }
+
+    public function getPrimaryStatusAttribute(): string
+    {
+        return $this->isPrimary ? 'Primary Contact' : 'Secondary Contact';
+    }
+
+    public function getContactInfoAttribute(): string
+    {
+        $info = [];
+        if ($this->email) {
+            $info[] = $this->email;
+        }
+        if ($this->phone) {
+            $info[] = $this->phone;
+        }
+        return implode(' | ', $info) ?: 'No contact info';
     }
 }
