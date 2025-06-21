@@ -53,7 +53,9 @@
       "Bash(rg:*)",
       "mcp__Context7__resolve-library-id",
       "mcp__Context7__get-library-docs",
-      "mcp__exa__web_search_exa"
+      "mcp__exa__web_search_exa",
+      "Bash(git checkout:*)",
+      "Bash(COMPOSER_PROCESS_TIMEOUT=1800 composer install --prefer-dist --optimize-autoloader)"
     ]
   },
   "enabledMcpjsonServers": [

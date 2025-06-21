@@ -8,8 +8,9 @@
     "require": {
         "php": "^8.2",
         "ext-pdo_sqlite": "*",
-        "filament/filament": "^3.3",
-        "laravel/framework": "^12.0",
+        "blade-ui-kit/blade-heroicons": "^2.6",
+        "filament/filament": "*",
+        "laravel/framework": "*",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6"
     },
@@ -70,6 +71,7 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,
+        "process-timeout": 1800,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
