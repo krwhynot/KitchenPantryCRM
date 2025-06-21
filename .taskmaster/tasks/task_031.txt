@@ -1,0 +1,27 @@
+# Task ID: 31
+# Title: Develop Principal/Brand Management Module
+# Status: pending
+# Dependencies: 23, 25
+# Priority: medium
+# Description: Create functionality for managing 11 brands with product line associations
+# Details:
+1. Create Filament resource for Principal model
+2. Create Filament resource for ProductLine model
+3. Implement list views with filtering, sorting, and search
+4. Create forms with appropriate fields for each model
+5. Add validation rules for all fields
+6. Implement relationship management between principals and product lines
+7. Create detail pages with related information
+8. Add bulk actions for both models
+9. Implement custom filters
+10. Create import/export functionality
+11. Pre-seed the system with the 11 required brands
+
+# Test Strategy:
+1. Test CRUD operations for principals and product lines
+2. Verify validation rules work correctly
+3. Test filtering, sorting, and search functionality
+4. Verify relationship management works correctly
+5. Test bulk actions for both models
+6. Verify import/export functionality
+7. Confirm all 11 required brands are properly configured

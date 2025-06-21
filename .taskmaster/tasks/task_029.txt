@@ -1,0 +1,26 @@
+# Task ID: 29
+# Title: Create Sales Pipeline Management Module
+# Status: pending
+# Dependencies: 26, 27
+# Priority: high
+# Description: Implement a five-stage sales pipeline with opportunity tracking and reporting
+# Details:
+1. Create Filament resource for Opportunity model
+2. Implement list view with filtering, sorting, and search
+3. Create form with fields: organization (select), contact (select), title, description, value, stage (select: lead, prospect, proposal, negotiation, closed), status (select: open, won, lost)
+4. Add validation rules for all fields
+5. Implement kanban board view for pipeline stages
+6. Create opportunity detail page
+7. Add relationship managers to link opportunities to organizations and contacts
+8. Implement stage transition actions with optional notes
+9. Add custom filters for organization, contact, stage, status, value range
+10. Create pipeline summary widgets for dashboard
+
+# Test Strategy:
+1. Test CRUD operations for opportunities
+2. Verify validation rules work correctly
+3. Test filtering, sorting, and search functionality
+4. Test kanban board view and drag-drop functionality
+5. Verify stage transitions work correctly
+6. Test relationship management with organizations and contacts
+7. Verify pipeline summary calculations are accurate

@@ -1,243 +1,112 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
+# Product Requirements Document: PantryCRM
 
-# write this as a prd.txt file:
-
-prd.txt
-
----
-Kitchen Pantry CRM – Product Requirements Document (PRD)
-Date: June 20, 2025
-
-========================================================
-EXECUTIVE SUMMARY
-========================================================
-Kitchen Pantry CRM is a custom Customer Relationship Management system specifically designed for the food service industry. This system will replace an existing Excel-based workflow for a family company with 4 sales representatives, providing modern CRM capabilities tailored to food service sales operations.
-
-The system is engineered for industry-specific needs, targeting a strict budget of \$18/month Azure hosting costs while supporting 4 concurrent users.
-
-========================================================
-CORE TECHNOLOGIES
-========================================================
-Backend Framework: Laravel 10.x
-Frontend Framework: Filament PHP v3.3+ (Admin Panel)
-Database: SQLite
-Hosting: Azure App Service (Linux)
-Version Control: Git with GitHub
-
-Key Components:
-
-- Authentication: Laravel Breeze or Filament's built-in auth
-- Database ORM: Eloquent ORM
-- Frontend: Alpine.js, Tailwind CSS, Livewire (for reactive components)
-- Development Tools: Composer, PHP 8.2+, VS Code
-- CI/CD: GitHub Actions
-- Azure Services: App Service (Linux), Azure Database for PostgreSQL - Flexible Server, Azure Virtual Network (if applicable)
-- Testing: PHPUnit
-- Deployment: Azure App Service Deployment Center
-- Monitoring: Azure Monitor (to be configured)
-
-========================================================
-PROJECT GOALS \& OBJECTIVES
-========================================================
-Primary Goals:
-
-- Replace Excel-based customer tracking system
-- Accelerate data entry by 50% compared to Excel
-- Improve report generation speed by 80%
-- Achieve sub-second search performance
-- Enable multi-device access (Windows touch laptop primary)
-- Maintain 100% data migration accuracy from Excel
-
-Business Objectives:
-
-- Streamline sales process for food service industry
-- Improve customer relationship tracking and follow-up
-- Enable better sales pipeline visibility
-- Reduce administrative overhead
-- Support business growth within existing cost structure
-
-========================================================
-TARGET USERS
-========================================================
-
-- Primary: 4 Sales Representatives (daily users)
-- Secondary: Management (reporting and oversight)
-- User Personas:
-    - Food Service Sales Rep: Field-based, needs quick data entry, mobile access
-    - Sales Manager: Needs reporting, pipeline visibility, team oversight
-    - Executive: High-level reporting, ROI tracking
-
-========================================================
-
-1. INTRODUCTION
-========================================================
-1.1 Purpose
-
-- Define requirements for a CRM system tailored to food service sales professionals, enabling management of customer relationships, interactions, and pipeline optimization.
-
-1.2 Product Overview
-
-- Centralized platform for organizations, contacts, interactions, and reporting. Designed for efficient tracking, prioritization, and actionable insights.
-
-1.3 Scope
-
-- Initial release covers core CRM features for food service: organization/contact management, interaction tracking, pipeline management, and reporting.
-
-========================================================
-2. PRODUCT FEATURES AND REQUIREMENTS
-========================================================
-
-2.1 Dashboard (Home Page)
-
-- Personalized dashboard on login
-- High-priority tasks for the week
-- Recent interactions needing follow-up
-- Upcoming meetings or scheduled interactions
-- Quick view of A-priority organizations
-- Weekly goals and progress tracking
-- Clean navigation bar for Organizations, Contacts, Interactions, Reports
-
-2.2 Organization Management
-
-- CRUD for restaurants/food service businesses
-- Priority classification (A-D)
-- Market segment categorization (Fine Dining, Fast Food, Healthcare, Catering, Institutional)
-- Distributor tracking (Sysco, USF, PFG, Direct, Other)
-- Geographic info and contact details
-- Account manager assignment
-- Data grid with sort, filter, search (<1s response)
-- Organization profile: basic info, contacts, recent interactions, opportunities, notes
-- Prominent "Add New Organization" button
-
-2.3 Contact Management
-
-- Multiple contacts per organization
-- Role-based categorization (Executive Chef, Buyer, Manager, Owner, Kitchen Manager)
-- Contact info (phone, email, LinkedIn)
-- Position hierarchy
-- Contact interaction history
-- Searchable list, quick lookup
-- Contact profile: full info, org affiliation, interaction history, notes, direct links for new interactions
-
-2.4 Interaction Tracking
-
-- Six types: Email, Call, In Person, Demo/Sampled, Quoted Price, Follow-up
-- 30-second entry target
-- Date/time stamping
-- Opportunity linkage
-- Follow-up task creation
-- Interaction history by contact/org
-- Bulk entry capabilities
-- Calendar view, filters, quick templates
-
-2.5 Sales Pipeline Management
-
-- Five-stage process: Lead-Discovery, Contacted, Sampled/Visited, Follow-up, Close (Won/Lost)
-- Opportunity tracking, status updates
-- Revenue estimation (optional)
-- Close date projections
-- Loss reason tracking
-- Pipeline reports and analytics
-
-2.6 Principal/Brand Management
-
-- Support for 11 brands: Kaufholds, Frites Street, Better Balance, VAF, Ofk, Annasea, Wicks, RJC, Kayco, Abdale, Land Lovers
-- Product line association with opportunities
-- Brand-specific reporting
-
-2.7 Reporting System
-
-- Four core reports (<10s generation): Weekly Priority Updates, Account Manager Activity, Pipeline Status, Success Rate
-- Export to Excel, PDF
-- Custom date ranges, automated delivery, team sharing, custom templates
-
-2.8 Settings Management
-
-- Dynamic config for: priority levels (A-D, colors), market segments, distributor options, contact roles, interaction types, sales stages, brands, custom dropdowns
-
-2.9 Quick Add Menu
-
-- Accessible from any page (+ button)
-- Add organization, contact, interaction, schedule follow-up, create opportunity
-
-2.10 Search Functionality
-
-- Global search bar
-- Search organizations, contacts, interactions, notes, opportunities (<1s response)
-
-2.11 Profile and Settings
-
-- Update account info, notification preferences, dashboard layout, task list, personal goals/tracking
-
-========================================================
-3. NON-FUNCTIONAL REQUIREMENTS
-========================================================
-
-- Support at least 4 concurrent users
-- Page load <2 seconds
-- Database queries <1 second
-- Role-based access control
-- Secure storage/encryption of customer data
-- Compliance with data protection regulations
-- Intuitive, mobile-responsive, accessible interface
-- System uptime 99.9%
-- Regular backups, disaster recovery
-- Azure hosting budget: \$18/month
-
-========================================================
-4. TECHNICAL REQUIREMENTS
-========================================================
-
-- Web-based, mobile-responsive (Windows touch laptop primary)
-- Email/calendar integration
-- Data import/export (Excel, CSV, PDF)
-- Secure database, regular backups
-
-========================================================
-5. IMPLEMENTATION CONSIDERATIONS
-========================================================
-
-- Agile methodology
-- Stakeholder reviews
-- Iterative feature delivery
-- Comprehensive testing (UAT, performance, reliability)
-- Phased rollout, user training
-- Feedback mechanism
-
-========================================================
-6. TIMELINE AND MILESTONES
-========================================================
-
-- Phase 1: Dashboard, Organizations, Contacts
-- Phase 2: Interactions, Reports
-- Phase 3: Advanced features/integrations
-- Requirements approval: [Date]
-- Design completion: [Date]
-- Development completion: [Date]
-- Testing completion: [Date]
-- User training: [Date]
-- Launch: [Date]
-
-========================================================
-7. APPENDICES
-========================================================
-Glossary:
-
-- Organization: Customer/prospect company/entity
-- Contact: Individual within an organization
-- Interaction: Communication/meeting with a contact
-- Opportunity: Potential sale/business deal
-- Priority Level: Importance classification (A-D)
-
-Related Documents:
-
-- UI Design Specifications
-- Data Schema
-- API Documentation
+## Project Overview
+- **Name:** PantryCRM (Kitchen Pantry Customer Relationship Management System)
+- **Description:** A Laravel 10.x application with Filament PHP v3.3+ for managing food service business relationships, including organizations, contacts, interactions, and sales pipeline management.
+- **Technology Stack:** Laravel 10.x, Filament PHP v3.3+, SQLite database, Azure App Service deployment.
+- **Budget Constraint:** $18/month hosting budget.
+- **Performance Requirements:** Sub-second search, 2-second page loads, 10-second report generation.
 
 ---
 
-<div style="text-align: center">⁂</div>
+## Core Tasks
 
-[^1]: paste.txt
+### Task 1: Project Setup and Repository Configuration
+- **Priority:** HIGH
+- **Dependencies:** None
+- **Description:** Initialize Laravel project with Filament, configure environment
 
+### Task 2: Database Schema Design and Migration
+- **Priority:** HIGH
+- **Dependencies:** Task 1
+- **Description:** Design and implement complete database schema for all entities
+
+### Task 3: Eloquent Model Creation and Relationships
+- **Priority:** HIGH
+- **Dependencies:** Task 2
+- **Description:** Create all Eloquent models with proper relationships
+
+### Task 4: Authentication System Implementation
+- **Priority:** HIGH
+- **Dependencies:** Task 3
+- **Description:** Implement user authentication with role-based access control
+
+### Task 5: Settings Management Module
+- **Priority:** HIGH
+- **Dependencies:** Task 3
+- **Description:** Create dynamic configuration system for application settings
+
+### Task 6: Organization Management Module
+- **Priority:** HIGH
+- **Dependencies:** Tasks 4, 5
+- **Description:** CRUD functionality for managing organizations with priority classification
+
+### Task 7: Contact Management Module
+- **Priority:** HIGH
+- **Dependencies:** Task 6
+- **Description:** Functionality for managing contacts linked to organizations
+
+### Task 8: Interaction Tracking Module
+- **Priority:** HIGH
+- **Dependencies:** Tasks 6, 7
+- **Description:** System for tracking interactions with 30-second entry target
+
+### Task 9: Sales Pipeline Management Module
+- **Priority:** HIGH
+- **Dependencies:** Tasks 6, 7
+- **Description:** Five-stage sales pipeline with opportunity tracking
+
+### Task 10: Dashboard Implementation
+- **Priority:** MEDIUM
+- **Dependencies:** Tasks 4, 6, 7, 8, 9
+- **Description:** Personalized dashboard with widgets and quick views
+
+### Task 11: Principal/Brand Management Module
+- **Priority:** MEDIUM
+- **Dependencies:** Tasks 3, 5
+- **Description:** Support for 11 brands with product line association
+
+### Task 12: Reporting System Implementation
+- **Priority:** MEDIUM
+- **Dependencies:** Tasks 6, 7, 8, 9, 11
+- **Description:** Four core reports with export capabilities and automated delivery
+
+### Task 13: Search Functionality Implementation
+- **Priority:** MEDIUM
+- **Dependencies:** Tasks 6, 7, 8, 9
+- **Description:** Global search with sub-second response time across all entities
+
+### Task 14: Data Import/Export System
+- **Priority:** MEDIUM
+- **Dependencies:** Tasks 6, 7, 8, 9, 11
+- **Description:** Excel import and export functionality for all entities
+
+### Task 15: Quick Add Menu Implementation
+- **Priority:** LOW
+- **Dependencies:** Tasks 6, 7, 8, 9
+- **Description:** Accessible quick add menu for common entities
+
+### Task 16: Profile and Settings Page Implementation
+- **Priority:** LOW
+- **Dependencies:** Task 4
+- **Description:** User profile management and personal settings
+
+### Task 17: Email and Calendar Integration
+- **Priority:** LOW
+- **Dependencies:** Task 8
+- **Description:** Integration with email and calendar systems
+
+### Task 18: Azure Deployment Configuration
+- **Priority:** HIGH
+- **Dependencies:** Tasks 1, 2
+- **Description:** Production deployment setup within $18/month budget
+
+### Task 19: Data Migration from Excel
+- **Priority:** HIGH
+- **Dependencies:** Tasks 2, 3, 14
+- **Description:** Migration from existing Excel system with 100% accuracy
+
+### Task 20: Performance Optimization
+- **Priority:** MEDIUM
+- **Dependencies:** Tasks 10, 12, 13, 18, 19
+- **Description:** Optimize for sub-second search, 2-second page loads, 10-second reports

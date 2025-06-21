@@ -1,0 +1,25 @@
+# Task ID: 22
+# Title: Design and Implement Database Schema
+# Status: pending
+# Dependencies: 21
+# Priority: high
+# Description: Create comprehensive database schema for all entities including organizations, contacts, interactions, and sales pipeline
+# Details:
+Create migrations for the following tables:
+1. `users` - Standard Laravel users table with role field
+2. `organizations` - Fields: id, name, address, phone, email, website, priority (high/medium/low), created_at, updated_at
+3. `contacts` - Fields: id, organization_id, first_name, last_name, title, email, phone, notes, created_at, updated_at
+4. `interactions` - Fields: id, organization_id, contact_id, user_id, type, date, notes, created_at, updated_at
+5. `opportunities` - Fields: id, organization_id, contact_id, user_id, title, description, value, stage (lead/prospect/proposal/negotiation/closed), status (open/won/lost), created_at, updated_at
+6. `principals` - Fields: id, name, description, created_at, updated_at
+7. `product_lines` - Fields: id, principal_id, name, description, created_at, updated_at
+8. `settings` - Fields: id, key, value, created_at, updated_at
+
+Ensure proper foreign key constraints and indexes for performance.
+
+# Test Strategy:
+1. Run migrations with `php artisan migrate`
+2. Verify schema with `php artisan db:show`
+3. Create test data insertion script
+4. Test foreign key constraints by attempting invalid operations
+5. Verify indexes with database inspection tools

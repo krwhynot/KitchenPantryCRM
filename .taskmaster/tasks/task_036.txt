@@ -1,0 +1,26 @@
+# Task ID: 36
+# Title: Develop User Profile and Settings Pages
+# Status: pending
+# Dependencies: 24, 25
+# Priority: low
+# Description: Create user profile management and personal settings pages for customization
+# Details:
+1. Create user profile page in Filament
+2. Implement form for updating profile information
+3. Add avatar upload functionality
+4. Create personal settings page
+5. Implement theme customization options
+6. Add notification preferences
+7. Create dashboard widget preferences
+8. Implement language selection
+9. Add password change functionality
+10. Create activity log for user
+
+# Test Strategy:
+1. Test profile update functionality
+2. Verify avatar upload and display
+3. Test personal settings changes
+4. Verify theme customization works correctly
+5. Test notification preferences are respected
+6. Verify dashboard widget preferences persist
+7. Test password change functionality

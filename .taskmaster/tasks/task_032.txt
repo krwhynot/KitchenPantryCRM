@@ -1,0 +1,30 @@
+# Task ID: 32
+# Title: Build Reporting System
+# Status: pending
+# Dependencies: 26, 27, 28, 29, 31
+# Priority: medium
+# Description: Implement four core reports with export capabilities and automated delivery
+# Details:
+1. Create reporting framework with Filament
+2. Implement the following reports:
+   - Organization activity report
+   - Sales pipeline report
+   - User activity report
+   - Principal/brand performance report
+3. Add filtering options to all reports
+4. Implement export to Excel, CSV, and PDF
+5. Create scheduled report generation
+6. Implement email delivery of reports
+7. Add report favorites functionality
+8. Create custom report builder
+9. Implement report caching for performance
+10. Optimize for 10-second report generation time
+
+# Test Strategy:
+1. Test report generation with various parameters
+2. Verify filtering options work correctly
+3. Test export functionality for all formats
+4. Verify scheduled generation works correctly
+5. Test email delivery of reports
+6. Measure report generation time to ensure 10-second target
+7. Verify report data accuracy against direct database queries

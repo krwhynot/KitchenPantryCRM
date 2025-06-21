@@ -1,0 +1,25 @@
+# Task ID: 23
+# Title: Create Eloquent Models with Relationships
+# Status: pending
+# Dependencies: 22
+# Priority: high
+# Description: Develop all Eloquent models with proper relationships, accessors, mutators, and scopes
+# Details:
+Create the following models with relationships:
+1. `User` - hasMany interactions, hasMany opportunities
+2. `Organization` - hasMany contacts, hasMany interactions, hasMany opportunities
+3. `Contact` - belongsTo organization, hasMany interactions, hasMany opportunities
+4. `Interaction` - belongsTo organization, belongsTo contact, belongsTo user
+5. `Opportunity` - belongsTo organization, belongsTo contact, belongsTo user
+6. `Principal` - hasMany productLines
+7. `ProductLine` - belongsTo principal
+8. `Setting` - No relationships
+
+Implement accessors/mutators for formatting data and scopes for common queries (e.g., priorityLevel for organizations, activeOpportunities, etc.)
+
+# Test Strategy:
+1. Create unit tests for each model
+2. Test relationship loading with eager loading
+3. Verify accessors and mutators work correctly
+4. Test custom scopes with various parameters
+5. Ensure proper JSON serialization of models

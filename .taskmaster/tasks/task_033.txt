@@ -1,0 +1,27 @@
+# Task ID: 33
+# Title: Implement Global Search Functionality
+# Status: pending
+# Dependencies: 26, 27, 28, 29, 31
+# Priority: medium
+# Description: Create a global search with sub-second response time across all entities
+# Details:
+1. Implement Laravel Scout with SQLite FTS extension
+2. Configure searchable models (Organization, Contact, Interaction, Opportunity, Principal, ProductLine)
+3. Create global search component in Filament
+4. Implement type-ahead suggestions
+5. Add result categorization by entity type
+6. Implement highlighting of search terms in results
+7. Create detailed search results page
+8. Add filtering options to search results
+9. Implement search history
+10. Optimize indexes for sub-second performance
+11. Add search analytics to track common searches
+
+# Test Strategy:
+1. Test search functionality with various queries
+2. Measure search response time to ensure sub-second target
+3. Verify type-ahead suggestions work correctly
+4. Test result categorization and highlighting
+5. Verify filtering options work on search results
+6. Test search with high volume of records
+7. Verify search analytics are captured correctly

@@ -1,0 +1,26 @@
+# Task ID: 38
+# Title: Configure Azure App Service Deployment
+# Status: pending
+# Dependencies: 21, 22
+# Priority: high
+# Description: Set up production deployment on Azure App Service within the $18/month budget constraint
+# Details:
+1. Create Azure account and configure subscription
+2. Set up Azure App Service plan within $18/month budget
+3. Configure deployment from Git repository
+4. Set up environment variables for production
+5. Configure SQLite database in production
+6. Implement backup strategy
+7. Set up SSL certificate
+8. Configure custom domain
+9. Implement logging and monitoring
+10. Create deployment documentation
+
+# Test Strategy:
+1. Test deployment process
+2. Verify application works correctly in production
+3. Test SSL certificate and custom domain
+4. Verify environment variables are set correctly
+5. Test backup and restore process
+6. Monitor performance to ensure it meets requirements
+7. Verify costs stay within $18/month budget

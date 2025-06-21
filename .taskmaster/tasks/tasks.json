@@ -2,674 +2,292 @@
   "master": {
     "tasks": [
       {
-        "id": 1,
-        "title": "Project Setup and Repository Configuration",
-        "description": "Initialize the Laravel 10.x project with Filament PHP v3.3+ and configure the development environment with required dependencies.",
-        "details": "1. Create a new Laravel 10.x project using Composer\n```bash\ncomposer create-project laravel/laravel kitchen-pantry-crm\ncd kitchen-pantry-crm\n```\n2. Install Filament PHP v3.3+\n```bash\ncomposer require filament/filament:^3.3\nphp artisan filament:install --panels\n```\n3. Configure SQLite database connection in .env file\n```\nDB_CONNECTION=sqlite\nDB_DATABASE=database/database.sqlite\n```\n4. Install additional dependencies:\n```bash\ncomposer require laravel/breeze\nphp artisan breeze:install\nnpm install\nnpm run dev\n```\n5. Initialize Git repository and create initial commit\n```bash\ngit init\ngit add .\ngit commit -m \"Initial commit: Laravel with Filament setup\"\n```\n6. Create GitHub repository and push code\n7. Configure GitHub Actions for CI/CD",
-        "testStrategy": "1. Verify Laravel installation with `php artisan --version`\n2. Confirm Filament installation with `php artisan filament:info`\n3. Test database connection with `php artisan migrate:status`\n4. Ensure development server runs without errors using `php artisan serve`\n5. Verify Git repository is properly initialized and connected to GitHub",
+        "id": 21,
+        "title": "Initialize Laravel Project with Filament",
+        "description": "Set up a new Laravel 10.x project with Filament PHP v3.3+ and configure the development environment",
+        "details": "1. Install Laravel 10.x using Composer: `composer create-project laravel/laravel PantryCRM`\n2. Navigate to project directory: `cd PantryCRM`\n3. Install Filament v3.3+: `composer require filament/filament:^3.3`\n4. Configure Filament: `php artisan filament:install --panels`\n5. Set up SQLite database in .env file: `DB_CONNECTION=sqlite`\n6. Create empty database file: `touch database/database.sqlite`\n7. Configure version control: `git init && git add . && git commit -m \"Initial commit\"`\n8. Set up development environment with proper PHP version (8.1+)\n9. Configure IDE helpers and code style tools",
+        "testStrategy": "1. Verify Laravel installation with `php artisan --version`\n2. Verify Filament installation with `php artisan filament:info`\n3. Run `php artisan serve` and confirm application loads correctly\n4. Confirm database connection with `php artisan migrate:status`",
         "priority": "high",
         "dependencies": [],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 2,
-        "title": "Authentication System Implementation",
-        "description": "Implement user authentication using Laravel Breeze or Filament's built-in authentication system with role-based access control.",
-        "details": "1. Configure Filament authentication\n```bash\nphp artisan make:filament-user\n```\n2. Create user roles migration\n```bash\nphp artisan make:migration create_roles_table\n```\n3. Define roles table structure:\n```php\nSchema::create('roles', function (Blueprint $table) {\n    $table->id();\n    $table->string('name');\n    $table->string('description')->nullable();\n    $table->timestamps();\n});\n\nSchema::create('role_user', function (Blueprint $table) {\n    $table->id();\n    $table->foreignId('user_id')->constrained()->onDelete('cascade');\n    $table->foreignId('role_id')->constrained()->onDelete('cascade');\n    $table->timestamps();\n});\n```\n4. Create Role model and establish relationships\n5. Implement role-based middleware\n6. Configure login, registration, password reset, and email verification\n7. Create user profile management page\n8. Implement user settings and preferences storage",
-        "testStrategy": "1. Unit tests for User and Role models\n2. Feature tests for authentication flows (login, logout, registration)\n3. Test role-based access control with different user types\n4. Verify password reset functionality\n5. Test user profile updates and settings management\n6. Ensure proper validation of user inputs",
+        "id": 22,
+        "title": "Design and Implement Database Schema",
+        "description": "Create comprehensive database schema for all entities including organizations, contacts, interactions, and sales pipeline",
+        "details": "Create migrations for the following tables:\n1. `users` - Standard Laravel users table with role field\n2. `organizations` - Fields: id, name, address, phone, email, website, priority (high/medium/low), created_at, updated_at\n3. `contacts` - Fields: id, organization_id, first_name, last_name, title, email, phone, notes, created_at, updated_at\n4. `interactions` - Fields: id, organization_id, contact_id, user_id, type, date, notes, created_at, updated_at\n5. `opportunities` - Fields: id, organization_id, contact_id, user_id, title, description, value, stage (lead/prospect/proposal/negotiation/closed), status (open/won/lost), created_at, updated_at\n6. `principals` - Fields: id, name, description, created_at, updated_at\n7. `product_lines` - Fields: id, principal_id, name, description, created_at, updated_at\n8. `settings` - Fields: id, key, value, created_at, updated_at\n\nEnsure proper foreign key constraints and indexes for performance.",
+        "testStrategy": "1. Run migrations with `php artisan migrate`\n2. Verify schema with `php artisan db:show`\n3. Create test data insertion script\n4. Test foreign key constraints by attempting invalid operations\n5. Verify indexes with database inspection tools",
         "priority": "high",
         "dependencies": [
-          1
+          21
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 3,
-        "title": "Database Schema Design and Migration",
-        "description": "Design and implement the database schema for all core entities including organizations, contacts, interactions, opportunities, and settings.",
-        "details": "1. Create migrations for core entities:\n```bash\nphp artisan make:migration create_organizations_table\nphp artisan make:migration create_contacts_table\nphp artisan make:migration create_interactions_table\nphp artisan make:migration create_opportunities_table\nphp artisan make:migration create_brands_table\nphp artisan make:migration create_settings_table\n```\n\n2. Define organizations table:\n```php\nSchema::create('organizations', function (Blueprint $table) {\n    $table->id();\n    $table->string('name');\n    $table->string('priority', 1)->default('C'); // A-D priority\n    $table->string('market_segment')->nullable();\n    $table->string('distributor')->nullable();\n    $table->string('address')->nullable();\n    $table->string('city')->nullable();\n    $table->string('state')->nullable();\n    $table->string('zip')->nullable();\n    $table->string('phone')->nullable();\n    $table->string('website')->nullable();\n    $table->text('notes')->nullable();\n    $table->foreignId('account_manager_id')->nullable()->constrained('users');\n    $table->timestamps();\n    $table->softDeletes();\n});\n```\n\n3. Define contacts table with relationships to organizations\n4. Define interactions table with relationships to contacts and organizations\n5. Define opportunities table with sales pipeline stages\n6. Define brands table and product relationships\n7. Define settings tables for dynamic configuration options\n8. Create indexes for frequently queried fields to ensure <1s response time",
-        "testStrategy": "1. Unit tests for all model relationships\n2. Test database migrations and rollbacks\n3. Verify foreign key constraints and cascading behaviors\n4. Test database query performance with sample data\n5. Validate data integrity constraints\n6. Ensure indexes are properly created for optimized search performance",
+        "id": 23,
+        "title": "Create Eloquent Models with Relationships",
+        "description": "Develop all Eloquent models with proper relationships, accessors, mutators, and scopes",
+        "details": "Create the following models with relationships:\n1. `User` - hasMany interactions, hasMany opportunities\n2. `Organization` - hasMany contacts, hasMany interactions, hasMany opportunities\n3. `Contact` - belongsTo organization, hasMany interactions, hasMany opportunities\n4. `Interaction` - belongsTo organization, belongsTo contact, belongsTo user\n5. `Opportunity` - belongsTo organization, belongsTo contact, belongsTo user\n6. `Principal` - hasMany productLines\n7. `ProductLine` - belongsTo principal\n8. `Setting` - No relationships\n\nImplement accessors/mutators for formatting data and scopes for common queries (e.g., priorityLevel for organizations, activeOpportunities, etc.)",
+        "testStrategy": "1. Create unit tests for each model\n2. Test relationship loading with eager loading\n3. Verify accessors and mutators work correctly\n4. Test custom scopes with various parameters\n5. Ensure proper JSON serialization of models",
         "priority": "high",
         "dependencies": [
-          1
-        ],
-        "status": "pending",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Design and Migrate Organizations Table",
-            "description": "Create the schema and migration for the Organizations table, which will store company information for the CRM system.",
-            "dependencies": [],
-            "details": "Create migration file for Organizations table with fields: id (UUID primary key), name, industry, employee_count, annual_revenue, website, address, city, state, postal_code, country, phone, created_at, updated_at, deleted_at (for soft deletes). Add indexes on name, industry, and country for faster filtering. Include a unique constraint on name to prevent duplicates. Ensure proper data types for all fields with appropriate constraints. Document the table structure with comments.",
-            "status": "pending"
-          },
-          {
-            "id": 2,
-            "title": "Design and Migrate Contacts Table",
-            "description": "Create the schema and migration for the Contacts table, which will store individual contact information linked to organizations.",
-            "dependencies": [
-              1
-            ],
-            "details": "Create migration file for Contacts table with fields: id (UUID primary key), organization_id (foreign key to Organizations), first_name, last_name, job_title, email, phone, mobile, address, city, state, postal_code, country, notes, created_at, updated_at, deleted_at. Add foreign key constraint to organization_id with cascade on delete. Create indexes on organization_id, email, and last_name for performance. Add a unique constraint on email. Include a combined index on first_name and last_name for name searches.",
-            "status": "pending"
-          },
-          {
-            "id": 3,
-            "title": "Design and Migrate Interactions Table",
-            "description": "Create the schema and migration for the Interactions table to track all communications with contacts.",
-            "dependencies": [
-              2
-            ],
-            "details": "Create migration file for Interactions table with fields: id (UUID primary key), contact_id (foreign key to Contacts), type (enum: email, call, meeting, note), subject, content, interaction_date, scheduled_date (for follow-ups), status (enum: completed, scheduled, canceled), created_by (user reference), created_at, updated_at. Add indexes on contact_id, interaction_date, type, and status for efficient filtering. Create a composite index on (contact_id, interaction_date) for chronological contact history queries. Add foreign key constraint to contact_id with cascade on delete.",
-            "status": "pending"
-          },
-          {
-            "id": 4,
-            "title": "Design and Migrate Opportunities Table",
-            "description": "Create the schema and migration for the Opportunities table to track sales opportunities with organizations.",
-            "dependencies": [
-              1,
-              2
-            ],
-            "details": "Create migration file for Opportunities table with fields: id (UUID primary key), organization_id (foreign key to Organizations), primary_contact_id (foreign key to Contacts), title, description, value, currency, stage (enum: lead, qualified, proposal, negotiation, closed_won, closed_lost), probability, expected_close_date, actual_close_date, created_by, created_at, updated_at, deleted_at. Add indexes on organization_id, primary_contact_id, stage, expected_close_date, and value for reporting queries. Create a composite index on (organization_id, stage) for organization pipeline views. Add foreign key constraints with appropriate cascade actions.",
-            "status": "pending"
-          },
-          {
-            "id": 5,
-            "title": "Design and Migrate Brands and Products Tables",
-            "description": "Create the schema and migration for the Brands and Products tables to track product offerings and their relationships.",
-            "dependencies": [],
-            "details": "Create migration files for: 1) Brands table with fields: id (UUID primary key), name, description, logo_url, website, created_at, updated_at. 2) Products table with fields: id (UUID primary key), brand_id (foreign key to Brands), name, description, sku, price, currency, category, status (active/inactive), created_at, updated_at. 3) OpportunityProducts junction table with fields: opportunity_id, product_id, quantity, unit_price, discount_percentage, total_price. Add appropriate indexes on all tables for performance, including brand_id, product category, and price ranges. Create foreign key constraints with appropriate cascade actions. Add unique constraints on brand name and product SKU.",
-            "status": "pending"
-          },
-          {
-            "id": 6,
-            "title": "Design and Migrate Settings Tables",
-            "description": "Create the schema and migration for Settings tables to store system and user preferences.",
-            "dependencies": [],
-            "details": "Create migration files for: 1) SystemSettings table with fields: id (UUID primary key), setting_key (unique), setting_value, data_type, description, created_at, updated_at. 2) UserSettings table with fields: id (UUID primary key), user_id, setting_key, setting_value, created_at, updated_at. 3) CustomFields table with fields: id (UUID primary key), entity_type (enum: organization, contact, opportunity, product), field_name, field_type (enum: text, number, date, boolean, enum), is_required, default_value, enum_options (JSON for enum types), display_order, created_at, updated_at. Add appropriate indexes on setting_key, user_id, and entity_type fields. Create unique constraints on combined keys where appropriate. Document the purpose of each settings table with comments.",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "title": "Eloquent Model Creation and Relationships",
-        "description": "Create Eloquent models for all entities and establish relationships between them.",
-        "details": "1. Create models for all entities:\n```bash\nphp artisan make:model Organization\nphp artisan make:model Contact\nphp artisan make:model Interaction\nphp artisan make:model Opportunity\nphp artisan make:model Brand\nphp artisan make:model Setting\n```\n\n2. Define Organization model relationships:\n```php\nclass Organization extends Model\n{\n    use HasFactory, SoftDeletes;\n    \n    protected $fillable = [\n        'name', 'priority', 'market_segment', 'distributor',\n        'address', 'city', 'state', 'zip', 'phone', 'website',\n        'notes', 'account_manager_id'\n    ];\n    \n    public function contacts()\n    {\n        return $this->hasMany(Contact::class);\n    }\n    \n    public function interactions()\n    {\n        return $this->hasMany(Interaction::class);\n    }\n    \n    public function opportunities()\n    {\n        return $this->hasMany(Opportunity::class);\n    }\n    \n    public function accountManager()\n    {\n        return $this->belongsTo(User::class, 'account_manager_id');\n    }\n}\n```\n\n3. Define Contact model with organization relationship\n4. Define Interaction model with contact and organization relationships\n5. Define Opportunity model with organization and brand relationships\n6. Define Brand model\n7. Implement model scopes for common queries (e.g., priorityLevel, activeOpportunities)\n8. Add accessor and mutator methods for formatted data",
-        "testStrategy": "1. Unit tests for all model relationships\n2. Test model scopes and query methods\n3. Verify accessors and mutators work correctly\n4. Test model factory creation for seeding test data\n5. Validate model validation rules\n6. Test eager loading performance for complex relationships",
-        "priority": "high",
-        "dependencies": [
-          3
+          22
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 5,
-        "title": "Dashboard Implementation",
-        "description": "Create a personalized dashboard that displays high-priority tasks, recent interactions, upcoming meetings, and quick view of A-priority organizations.",
-        "details": "1. Create Filament dashboard page\n```bash\nphp artisan make:filament-page Dashboard\n```\n\n2. Implement dashboard widgets:\n```php\nprotected function getHeaderWidgets(): array\n{\n    return [\n        Widgets\\StatsOverviewWidget::class,\n    ];\n}\n\nprotected function getWidgets(): array\n{\n    return [\n        Widgets\\HighPriorityTasksWidget::class,\n        Widgets\\RecentInteractionsWidget::class,\n        Widgets\\UpcomingMeetingsWidget::class,\n        Widgets\\PriorityOrganizationsWidget::class,\n        Widgets\\WeeklyGoalsWidget::class,\n    ];\n}\n```\n\n3. Create each widget with appropriate queries and display logic\n4. Implement navigation bar with links to Organizations, Contacts, Interactions, Reports\n5. Add quick action buttons for common tasks\n6. Implement user-specific dashboard customization\n7. Ensure all dashboard queries are optimized for performance",
-        "testStrategy": "1. Test dashboard loading performance\n2. Verify widget data accuracy\n3. Test dashboard with different user roles\n4. Validate responsive design for different screen sizes\n5. Test dashboard customization and persistence\n6. Verify navigation links work correctly",
+        "id": 24,
+        "title": "Implement Authentication System with RBAC",
+        "description": "Set up user authentication with role-based access control using Filament's authentication features",
+        "details": "1. Configure Filament authentication with `php artisan filament:users`\n2. Extend User model with roles field (enum: admin, manager, user)\n3. Create custom Filament authentication provider\n4. Implement login, logout, password reset functionality\n5. Create middleware for role-based access control\n6. Configure authorization policies for each model\n7. Set up registration by invitation only\n8. Implement remember me functionality\n9. Add failed login attempt tracking\n10. Configure session timeout settings",
+        "testStrategy": "1. Test user registration process\n2. Verify login with valid and invalid credentials\n3. Test password reset flow\n4. Verify role-based access restrictions\n5. Test authorization policies for each model and action\n6. Verify session timeout and remember me functionality",
+        "priority": "high",
+        "dependencies": [
+          21,
+          23
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 25,
+        "title": "Develop Settings Management Module",
+        "description": "Create a dynamic configuration system for application-wide and user-specific settings",
+        "details": "1. Create Filament resource for Settings model\n2. Implement key-value store pattern for settings\n3. Create settings cache layer for performance\n4. Develop settings facade for easy access throughout application\n5. Create settings page in Filament admin panel\n6. Implement settings categories (system, user, notification, etc.)\n7. Add validation rules for different setting types\n8. Create settings seeder with default values\n9. Implement export/import functionality for settings\n10. Add audit logging for settings changes",
+        "testStrategy": "1. Test CRUD operations for settings\n2. Verify settings cache works correctly\n3. Test settings facade in different contexts\n4. Verify validation rules prevent invalid settings\n5. Test import/export functionality\n6. Verify audit logging captures all changes",
+        "priority": "high",
+        "dependencies": [
+          23,
+          24
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 26,
+        "title": "Build Organization Management Module",
+        "description": "Implement CRUD functionality for managing organizations with priority classification and detailed information",
+        "details": "1. Create Filament resource for Organization model\n2. Implement list view with filtering, sorting, and search\n3. Create form with fields: name, address, phone, email, website, priority\n4. Add validation rules for all fields\n5. Implement soft deletes for organizations\n6. Create organization detail page with tabs for contacts, interactions, opportunities\n7. Add priority classification (high/medium/low) with color coding\n8. Implement bulk actions (delete, change priority)\n9. Add custom filters for priority levels\n10. Create organization import/export functionality",
+        "testStrategy": "1. Test CRUD operations for organizations\n2. Verify validation rules work correctly\n3. Test filtering, sorting, and search functionality\n4. Verify soft delete and restore operations\n5. Test priority classification changes\n6. Verify bulk actions work correctly\n7. Test import/export functionality",
+        "priority": "high",
+        "dependencies": [
+          23,
+          24,
+          25
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 27,
+        "title": "Implement Contact Management Module",
+        "description": "Create functionality for managing contacts linked to organizations with comprehensive contact information",
+        "details": "1. Create Filament resource for Contact model\n2. Implement list view with filtering, sorting, and search\n3. Create form with fields: first_name, last_name, title, email, phone, notes, organization (select)\n4. Add validation rules for all fields\n5. Implement soft deletes for contacts\n6. Create contact detail page with tabs for interactions, opportunities\n7. Add relationship manager to link contacts to organizations\n8. Implement bulk actions (delete, change organization)\n9. Add custom filters for organization\n10. Create contact import/export functionality",
+        "testStrategy": "1. Test CRUD operations for contacts\n2. Verify validation rules work correctly\n3. Test filtering, sorting, and search functionality\n4. Verify soft delete and restore operations\n5. Test organization relationship management\n6. Verify bulk actions work correctly\n7. Test import/export functionality",
+        "priority": "high",
+        "dependencies": [
+          26
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 28,
+        "title": "Develop Interaction Tracking Module",
+        "description": "Build a system for tracking interactions with organizations and contacts with a 30-second entry target",
+        "details": "1. Create Filament resource for Interaction model\n2. Implement list view with filtering, sorting, and search\n3. Create optimized form with fields: organization (select), contact (select), type (select: call, email, meeting, etc.), date, notes\n4. Add validation rules for all fields\n5. Implement quick entry form accessible from multiple locations\n6. Create interaction detail page\n7. Add relationship managers to link interactions to organizations and contacts\n8. Implement bulk actions (delete, change type)\n9. Add custom filters for organization, contact, type, date range\n10. Optimize form for 30-second entry time with smart defaults and minimal clicks",
+        "testStrategy": "1. Test CRUD operations for interactions\n2. Verify validation rules work correctly\n3. Test filtering, sorting, and search functionality\n4. Time interaction entry process to ensure 30-second target is met\n5. Test relationship management with organizations and contacts\n6. Verify bulk actions work correctly\n7. Test quick entry form from different locations",
+        "priority": "high",
+        "dependencies": [
+          26,
+          27
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 29,
+        "title": "Create Sales Pipeline Management Module",
+        "description": "Implement a five-stage sales pipeline with opportunity tracking and reporting",
+        "details": "1. Create Filament resource for Opportunity model\n2. Implement list view with filtering, sorting, and search\n3. Create form with fields: organization (select), contact (select), title, description, value, stage (select: lead, prospect, proposal, negotiation, closed), status (select: open, won, lost)\n4. Add validation rules for all fields\n5. Implement kanban board view for pipeline stages\n6. Create opportunity detail page\n7. Add relationship managers to link opportunities to organizations and contacts\n8. Implement stage transition actions with optional notes\n9. Add custom filters for organization, contact, stage, status, value range\n10. Create pipeline summary widgets for dashboard",
+        "testStrategy": "1. Test CRUD operations for opportunities\n2. Verify validation rules work correctly\n3. Test filtering, sorting, and search functionality\n4. Test kanban board view and drag-drop functionality\n5. Verify stage transitions work correctly\n6. Test relationship management with organizations and contacts\n7. Verify pipeline summary calculations are accurate",
+        "priority": "high",
+        "dependencies": [
+          26,
+          27
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 30,
+        "title": "Implement Dashboard with Widgets",
+        "description": "Create a personalized dashboard with widgets and quick views for key metrics and activities",
+        "details": "1. Create custom Filament dashboard\n2. Implement the following widgets:\n   - Recent interactions\n   - Upcoming opportunities by stage\n   - Organization count by priority\n   - Sales pipeline summary\n   - Activity calendar\n   - Quick add buttons\n3. Make widgets customizable and savable per user\n4. Implement widget refresh functionality\n5. Add filtering options to widgets\n6. Create dashboard layout manager\n7. Implement responsive design for all widgets\n8. Add export functionality for widget data\n9. Create dashboard state persistence\n10. Implement dashboard loading optimizations",
+        "testStrategy": "1. Test widget rendering and data accuracy\n2. Verify customization and saving works per user\n3. Test widget refresh functionality\n4. Verify filtering options work correctly\n5. Test responsive design on different screen sizes\n6. Verify export functionality works for all widgets\n7. Test dashboard loading performance",
         "priority": "medium",
         "dependencies": [
-          2,
-          4
+          26,
+          27,
+          28,
+          29
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 6,
-        "title": "Organization Management Module",
-        "description": "Implement CRUD functionality for managing food service businesses with priority classification, market segmentation, and distributor tracking.",
-        "details": "1. Create Filament resource for Organizations\n```bash\nphp artisan make:filament-resource Organization\n```\n\n2. Define form fields in resource:\n```php\nprotected function getFormSchema(): array\n{\n    return [\n        Forms\\Components\\Card::make()\n            ->schema([\n                Forms\\Components\\TextInput::make('name')\n                    ->required()\n                    ->maxLength(255),\n                Forms\\Components\\Select::make('priority')\n                    ->options([\n                        'A' => 'A - High Priority',\n                        'B' => 'B - Medium Priority',\n                        'C' => 'C - Standard Priority',\n                        'D' => 'D - Low Priority',\n                    ])\n                    ->required(),\n                Forms\\Components\\Select::make('market_segment')\n                    ->options([\n                        'Fine Dining' => 'Fine Dining',\n                        'Fast Food' => 'Fast Food',\n                        'Healthcare' => 'Healthcare',\n                        'Catering' => 'Catering',\n                        'Institutional' => 'Institutional',\n                    ]),\n                Forms\\Components\\Select::make('distributor')\n                    ->options([\n                        'Sysco' => 'Sysco',\n                        'USF' => 'US Foods',\n                        'PFG' => 'Performance Food Group',\n                        'Direct' => 'Direct',\n                        'Other' => 'Other',\n                    ]),\n                // Additional fields for address, contact info, etc.\n                Forms\\Components\\Select::make('account_manager_id')\n                    ->relationship('accountManager', 'name'),\n            ])\n    ];\n}\n```\n\n3. Configure table columns with sorting and filtering\n4. Implement organization profile view with tabs for contacts, interactions, opportunities\n5. Add search functionality with <1s response time\n6. Create organization detail page with all related information\n7. Implement bulk actions for organizations",
-        "testStrategy": "1. Test CRUD operations for organizations\n2. Verify search performance meets <1s requirement\n3. Test filtering and sorting functionality\n4. Validate form validation rules\n5. Test organization profile view with related data\n6. Verify bulk actions work correctly",
-        "priority": "high",
-        "dependencies": [
-          4
-        ],
-        "status": "pending",
-        "subtasks": []
-      },
-      {
-        "id": 7,
-        "title": "Contact Management Module",
-        "description": "Implement functionality for managing multiple contacts per organization with role-based categorization and interaction history.",
-        "details": "1. Create Filament resource for Contacts\n```bash\nphp artisan make:filament-resource Contact\n```\n\n2. Define form fields in resource:\n```php\nprotected function getFormSchema(): array\n{\n    return [\n        Forms\\Components\\Card::make()\n            ->schema([\n                Forms\\Components\\Select::make('organization_id')\n                    ->relationship('organization', 'name')\n                    ->required(),\n                Forms\\Components\\TextInput::make('first_name')\n                    ->required()\n                    ->maxLength(255),\n                Forms\\Components\\TextInput::make('last_name')\n                    ->required()\n                    ->maxLength(255),\n                Forms\\Components\\Select::make('role')\n                    ->options([\n                        'Executive Chef' => 'Executive Chef',\n                        'Buyer' => 'Buyer',\n                        'Manager' => 'Manager',\n                        'Owner' => 'Owner',\n                        'Kitchen Manager' => 'Kitchen Manager',\n                    ])\n                    ->required(),\n                Forms\\Components\\TextInput::make('phone')\n                    ->tel()\n                    ->maxLength(255),\n                Forms\\Components\\TextInput::make('email')\n                    ->email()\n                    ->maxLength(255),\n                Forms\\Components\\TextInput::make('linkedin')\n                    ->url()\n                    ->maxLength(255),\n                Forms\\Components\\Textarea::make('notes')\n                    ->maxLength(65535),\n            ])\n    ];\n}\n```\n\n3. Configure table columns with sorting and filtering\n4. Implement contact profile view with interaction history\n5. Add quick lookup functionality\n6. Create relationship manager between contacts and organizations\n7. Implement direct links for new interactions from contact profile",
-        "testStrategy": "1. Test CRUD operations for contacts\n2. Verify relationship with organizations works correctly\n3. Test contact search and filtering\n4. Validate form validation rules\n5. Test contact profile view with interaction history\n6. Verify quick lookup functionality performance",
-        "priority": "high",
-        "dependencies": [
-          4,
-          6
-        ],
-        "status": "pending",
-        "subtasks": []
-      },
-      {
-        "id": 8,
-        "title": "Interaction Tracking Module",
-        "description": "Implement system for tracking different types of interactions (Email, Call, In Person, etc.) with 30-second entry target and follow-up task creation.",
-        "details": "1. Create Filament resource for Interactions\n```bash\nphp artisan make:filament-resource Interaction\n```\n\n2. Define form fields in resource:\n```php\nprotected function getFormSchema(): array\n{\n    return [\n        Forms\\Components\\Card::make()\n            ->schema([\n                Forms\\Components\\Select::make('organization_id')\n                    ->relationship('organization', 'name')\n                    ->required()\n                    ->reactive()\n                    ->afterStateUpdated(fn (callable $set) => $set('contact_id', null)),\n                Forms\\Components\\Select::make('contact_id')\n                    ->relationship('contact', 'first_name', function (Builder $query, callable $get) {\n                        $query->where('organization_id', $get('organization_id'));\n                    }),\n                Forms\\Components\\Select::make('type')\n                    ->options([\n                        'Email' => 'Email',\n                        'Call' => 'Call',\n                        'In Person' => 'In Person',\n                        'Demo/Sampled' => 'Demo/Sampled',\n                        'Quoted Price' => 'Quoted Price',\n                        'Follow-up' => 'Follow-up',\n                    ])\n                    ->required(),\n                Forms\\Components\\DateTimePicker::make('interaction_date')\n                    ->required()\n                    ->default(now()),\n                Forms\\Components\\Textarea::make('notes')\n                    ->required(),\n                Forms\\Components\\Select::make('opportunity_id')\n                    ->relationship('opportunity', 'name'),\n                Forms\\Components\\Toggle::make('requires_followup')\n                    ->reactive(),\n                Forms\\Components\\DatePicker::make('followup_date')\n                    ->visible(fn (callable $get) => $get('requires_followup')),\n            ])\n    ];\n}\n```\n\n3. Implement quick entry form with 30-second entry target\n4. Create interaction history views by contact/organization\n5. Implement bulk entry capabilities\n6. Add calendar view for interactions\n7. Create quick templates for common interaction types\n8. Implement follow-up task creation and tracking",
-        "testStrategy": "1. Test CRUD operations for interactions\n2. Measure entry time to ensure 30-second target is achievable\n3. Test bulk entry functionality\n4. Verify calendar view displays correctly\n5. Test follow-up task creation and notifications\n6. Validate interaction templates work correctly",
-        "priority": "high",
-        "dependencies": [
-          4,
-          6,
-          7
-        ],
-        "status": "pending",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Interaction Resource Model Implementation",
-            "description": "Create the data model and API endpoints for the Interaction resource",
-            "dependencies": [],
-            "details": "1. Define the Interaction data model with fields for date, time, duration, type, contact, organization, notes, and follow-up flags\n2. Create database migrations for the new tables\n3. Implement API endpoints for CRUD operations\n4. Add validation rules for required fields\n5. Write unit tests for the model and API endpoints\n6. Document the API endpoints for frontend consumption",
-            "status": "pending"
-          },
-          {
-            "id": 2,
-            "title": "Quick Entry Form Development",
-            "description": "Build an optimized form for rapid interaction logging under 30 seconds",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Design a minimal form layout with essential fields only\n2. Implement reactive form with Angular Reactive Forms\n3. Add typeahead for contact and organization fields\n4. Create dynamic contact loading based on organization selection\n5. Add keyboard shortcuts for form navigation and submission\n6. Implement client-side validation with immediate feedback\n7. Add form state persistence to prevent data loss",
-            "status": "pending"
-          },
-          {
-            "id": 3,
-            "title": "Interaction History Views",
-            "description": "Implement list and detail views for interaction history",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Create a paginated list view of interactions\n2. Implement filtering by date range, type, and organization/contact\n3. Add sorting capabilities for all columns\n4. Build a detailed view for individual interactions\n5. Implement a related contacts/organizations sidebar\n6. Add export functionality for interaction lists\n7. Create visualizations for interaction frequency and types",
-            "status": "pending"
-          },
-          {
-            "id": 4,
-            "title": "Calendar View Implementation",
-            "description": "Develop a calendar interface for viewing and managing interactions",
-            "dependencies": [
-              1,
-              3
-            ],
-            "details": "1. Integrate a calendar component (FullCalendar or similar)\n2. Implement day, week, and month views\n3. Add interaction creation directly from calendar\n4. Enable drag-and-drop for rescheduling interactions\n5. Implement color coding by interaction type\n6. Add tooltips for quick information display\n7. Create a mini-month navigator for quick date selection",
-            "status": "pending"
-          },
-          {
-            "id": 5,
-            "title": "Interaction Templates System",
-            "description": "Create reusable templates for common interaction types",
-            "dependencies": [
-              1,
-              2
-            ],
-            "details": "1. Design the template data model with preset fields\n2. Implement template creation and management UI\n3. Add template selection in the quick entry form\n4. Create auto-population of fields based on template selection\n5. Implement template categories for organization\n6. Add permission controls for template creation/editing\n7. Create analytics for template usage frequency",
-            "status": "pending"
-          },
-          {
-            "id": 6,
-            "title": "Follow-up Task Creation",
-            "description": "Implement functionality to create follow-up tasks from interactions",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
-            "details": "1. Add follow-up fields to the interaction form\n2. Implement task creation API integration\n3. Create a UI for setting follow-up parameters (due date, assignee, priority)\n4. Add bidirectional linking between interactions and tasks\n5. Implement notification system for follow-up tasks\n6. Create a dashboard widget for pending follow-ups\n7. Add bulk follow-up creation for multiple interactions",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "id": 9,
-        "title": "Sales Pipeline Management Module",
-        "description": "Implement five-stage sales pipeline process with opportunity tracking, status updates, and revenue estimation.",
-        "details": "1. Create Filament resource for Opportunities\n```bash\nphp artisan make:filament-resource Opportunity\n```\n\n2. Define form fields in resource:\n```php\nprotected function getFormSchema(): array\n{\n    return [\n        Forms\\Components\\Card::make()\n            ->schema([\n                Forms\\Components\\Select::make('organization_id')\n                    ->relationship('organization', 'name')\n                    ->required(),\n                Forms\\Components\\TextInput::make('name')\n                    ->required()\n                    ->maxLength(255),\n                Forms\\Components\\Select::make('stage')\n                    ->options([\n                        'Lead-Discovery' => 'Lead-Discovery',\n                        'Contacted' => 'Contacted',\n                        'Sampled/Visited' => 'Sampled/Visited',\n                        'Follow-up' => 'Follow-up',\n                        'Won' => 'Closed - Won',\n                        'Lost' => 'Closed - Lost',\n                    ])\n                    ->required(),\n                Forms\\Components\\TextInput::make('estimated_revenue')\n                    ->numeric()\n                    ->prefix('$'),\n                Forms\\Components\\DatePicker::make('expected_close_date'),\n                Forms\\Components\\MultiSelect::make('brands')\n                    ->relationship('brands', 'name'),\n                Forms\\Components\\Textarea::make('notes')\n                    ->maxLength(65535),\n                Forms\\Components\\Textarea::make('loss_reason')\n                    ->visible(fn (callable $get) => $get('stage') === 'Lost')\n                    ->maxLength(65535),\n            ])\n    ];\n}\n```\n\n3. Implement pipeline visualization with drag-and-drop status updates\n4. Create opportunity detail view with related interactions\n5. Implement revenue forecasting based on opportunities\n6. Add loss reason tracking for closed-lost opportunities\n7. Create pipeline reports and analytics\n8. Implement stage transition history tracking",
-        "testStrategy": "1. Test CRUD operations for opportunities\n2. Verify pipeline visualization works correctly\n3. Test drag-and-drop status updates\n4. Validate revenue calculations\n5. Test stage transition history tracking\n6. Verify loss reason tracking for closed-lost opportunities",
+        "id": 31,
+        "title": "Develop Principal/Brand Management Module",
+        "description": "Create functionality for managing 11 brands with product line associations",
+        "details": "1. Create Filament resource for Principal model\n2. Create Filament resource for ProductLine model\n3. Implement list views with filtering, sorting, and search\n4. Create forms with appropriate fields for each model\n5. Add validation rules for all fields\n6. Implement relationship management between principals and product lines\n7. Create detail pages with related information\n8. Add bulk actions for both models\n9. Implement custom filters\n10. Create import/export functionality\n11. Pre-seed the system with the 11 required brands",
+        "testStrategy": "1. Test CRUD operations for principals and product lines\n2. Verify validation rules work correctly\n3. Test filtering, sorting, and search functionality\n4. Verify relationship management works correctly\n5. Test bulk actions for both models\n6. Verify import/export functionality\n7. Confirm all 11 required brands are properly configured",
         "priority": "medium",
         "dependencies": [
-          4,
-          6
-        ],
-        "status": "pending",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Create Opportunity Resource Model",
-            "description": "Design and implement the core Opportunity data model with all necessary fields and relationships",
-            "dependencies": [],
-            "details": "1. Define Opportunity schema with fields: name, value, probability, expected_close_date, status/stage, owner, related_contacts, related_company, source, notes\n2. Create database migrations\n3. Implement Opportunity model with appropriate validations\n4. Set up relationships with User, Contact, and Company models\n5. Add custom methods for calculating weighted revenue\n6. Create API endpoints for CRUD operations\n7. Write unit tests for model and API endpoints",
-            "status": "pending"
-          },
-          {
-            "id": 2,
-            "title": "Implement Pipeline Visualization Component",
-            "description": "Develop the visual kanban-style board for displaying opportunities across different pipeline stages",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Design pipeline board UI with columns representing sales stages\n2. Create responsive grid layout for opportunity cards\n3. Implement card component with opportunity details (name, value, probability, etc.)\n4. Add visual indicators for opportunity age and priority\n5. Implement filtering and sorting options\n6. Create summary statistics for each pipeline stage\n7. Ensure proper loading states and error handling\n8. Write component tests",
-            "status": "pending"
-          },
-          {
-            "id": 3,
-            "title": "Develop Drag-and-Drop Status Updates",
-            "description": "Implement drag-and-drop functionality to move opportunities between pipeline stages",
-            "dependencies": [
-              1,
-              2
-            ],
-            "details": "1. Integrate drag-and-drop library (React DnD or similar)\n2. Implement drag handlers for opportunity cards\n3. Create drop zones for each pipeline stage\n4. Add visual feedback during drag operations\n5. Implement backend API for updating opportunity stage\n6. Add optimistic UI updates with rollback on failure\n7. Implement validation rules for stage transitions\n8. Create confirmation dialogs for certain stage changes\n9. Add animation for smooth transitions",
-            "status": "pending"
-          },
-          {
-            "id": 4,
-            "title": "Build Revenue Forecasting System",
-            "description": "Create forecasting functionality to predict revenue based on pipeline opportunities",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Implement weighted revenue calculation algorithm\n2. Create time-based forecasting views (monthly, quarterly, annual)\n3. Develop historical win-rate analysis by stage\n4. Build forecast adjustment capabilities for sales managers\n5. Implement visualization charts for forecast data\n6. Add comparison with targets/quotas\n7. Create export functionality for forecast reports\n8. Implement caching for performance optimization\n9. Write unit tests for forecasting algorithms",
-            "status": "pending"
-          },
-          {
-            "id": 5,
-            "title": "Implement Loss Reason Tracking",
-            "description": "Add functionality to track and analyze reasons for lost opportunities",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Extend Opportunity model with loss_reason and loss_details fields\n2. Create configurable loss reason categories\n3. Implement loss reason selection UI when moving to 'Lost' stage\n4. Build loss reason analytics dashboard\n5. Create reports showing loss patterns by reason, sales rep, and time period\n6. Implement competitor tracking for competitive losses\n7. Add feedback collection for process improvement\n8. Create API endpoints for loss reason data\n9. Write tests for loss tracking functionality",
-            "status": "pending"
-          },
-          {
-            "id": 6,
-            "title": "Develop Stage Transition History",
-            "description": "Implement tracking and visualization of opportunity movement through pipeline stages",
-            "dependencies": [
-              1,
-              3
-            ],
-            "details": "1. Create StageTransition model to track stage changes\n2. Implement hooks/triggers to record transitions automatically\n3. Store timestamp, user, previous stage, new stage, and notes for each transition\n4. Build timeline visualization of stage history\n5. Calculate time spent in each stage\n6. Create reports for stage velocity analysis\n7. Implement stage-duration alerts for stalled opportunities\n8. Add API endpoints for transition history\n9. Write unit tests for transition tracking\n10. Create admin tools for history management",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "id": 10,
-        "title": "Principal/Brand Management Module",
-        "description": "Implement support for 11 brands with product line association and brand-specific reporting.",
-        "details": "1. Create Filament resource for Brands\n```bash\nphp artisan make:filament-resource Brand\n```\n\n2. Define form fields in resource:\n```php\nprotected function getFormSchema(): array\n{\n    return [\n        Forms\\Components\\Card::make()\n            ->schema([\n                Forms\\Components\\TextInput::make('name')\n                    ->required()\n                    ->maxLength(255),\n                Forms\\Components\\Textarea::make('description')\n                    ->maxLength(65535),\n                Forms\\Components\\FileUpload::make('logo')\n                    ->image()\n                    ->directory('brands'),\n                Forms\\Components\\Repeater::make('product_lines')\n                    ->schema([\n                        Forms\\Components\\TextInput::make('name')\n                            ->required(),\n                        Forms\\Components\\Textarea::make('description'),\n                    ]),\n            ])\n    ];\n}\n```\n\n3. Seed database with the 11 required brands: Kaufholds, Frites Street, Better Balance, VAF, Ofk, Annasea, Wicks, RJC, Kayco, Abdale, Land Lovers\n4. Implement brand-opportunity relationship\n5. Create brand-specific reporting\n6. Add brand filtering to opportunity and interaction lists\n7. Implement brand performance metrics",
-        "testStrategy": "1. Test CRUD operations for brands\n2. Verify seeded brands are correctly loaded\n3. Test brand-opportunity relationships\n4. Validate brand-specific reporting\n5. Test brand performance metrics calculations\n6. Verify brand filtering works correctly",
-        "priority": "medium",
-        "dependencies": [
-          4
+          23,
+          25
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 11,
-        "title": "Reporting System Implementation",
-        "description": "Create four core reports with export capabilities, custom date ranges, and automated delivery.",
-        "details": "1. Create Filament pages for each report:\n```bash\nphp artisan make:filament-page WeeklyPriorityUpdatesReport\nphp artisan make:filament-page AccountManagerActivityReport\nphp artisan make:filament-page PipelineStatusReport\nphp artisan make:filament-page SuccessRateReport\n```\n\n2. Implement report generation logic with optimized queries to ensure <10s generation time\n3. Create export functionality for Excel and PDF formats\n4. Implement custom date range selection\n5. Add automated report delivery via email\n6. Create report sharing functionality\n7. Implement custom report templates\n8. Add visualization components (charts, graphs) for key metrics",
-        "testStrategy": "1. Test report generation performance to ensure <10s requirement\n2. Verify export functionality for Excel and PDF\n3. Test custom date range selection\n4. Validate automated report delivery\n5. Test report sharing functionality\n6. Verify visualization components display correctly",
+        "id": 32,
+        "title": "Build Reporting System",
+        "description": "Implement four core reports with export capabilities and automated delivery",
+        "details": "1. Create reporting framework with Filament\n2. Implement the following reports:\n   - Organization activity report\n   - Sales pipeline report\n   - User activity report\n   - Principal/brand performance report\n3. Add filtering options to all reports\n4. Implement export to Excel, CSV, and PDF\n5. Create scheduled report generation\n6. Implement email delivery of reports\n7. Add report favorites functionality\n8. Create custom report builder\n9. Implement report caching for performance\n10. Optimize for 10-second report generation time",
+        "testStrategy": "1. Test report generation with various parameters\n2. Verify filtering options work correctly\n3. Test export functionality for all formats\n4. Verify scheduled generation works correctly\n5. Test email delivery of reports\n6. Measure report generation time to ensure 10-second target\n7. Verify report data accuracy against direct database queries",
         "priority": "medium",
         "dependencies": [
-          6,
-          7,
-          8,
-          9,
-          10
-        ],
-        "status": "pending",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Design Database Schema for Reporting System",
-            "description": "Create the necessary database schema to support all required reports including weekly priority updates, account manager activity, pipeline status, and success rate reports.",
-            "dependencies": [],
-            "details": "1. Analyze existing data structures and identify required data points for each report type\n2. Design optimized tables/views for reporting to ensure <10s query performance\n3. Create indexing strategy for reporting tables\n4. Document the schema with entity relationship diagrams\n5. Implement database migrations for the new schema\n6. Set up data synchronization between operational and reporting databases if needed",
-            "status": "pending"
-          },
-          {
-            "id": 2,
-            "title": "Implement Weekly Priority Updates Report",
-            "description": "Develop the backend and frontend components for the weekly priority updates report showing changes in priority status across projects.",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Create data access layer for priority data retrieval\n2. Implement caching mechanism for improved performance\n3. Develop API endpoint for weekly priority data\n4. Create report generation service with filtering capabilities\n5. Design UI component for displaying priority changes\n6. Implement date range selection for historical data viewing\n7. Add sorting and filtering options in the UI",
-            "status": "pending"
-          },
-          {
-            "id": 3,
-            "title": "Implement Account Manager Activity and Pipeline Status Reports",
-            "description": "Develop the backend and frontend components for account manager activity tracking and pipeline status reporting.",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Create data access layer for account manager activities\n2. Implement pipeline status tracking logic\n3. Develop API endpoints for both report types\n4. Create aggregation services for activity summaries\n5. Design UI components for both reports\n6. Implement filtering by account manager, date range, and status\n7. Add drill-down capabilities for detailed activity viewing",
-            "status": "pending"
-          },
-          {
-            "id": 4,
-            "title": "Implement Success Rate Report",
-            "description": "Develop the success rate reporting functionality to track conversion rates and project outcomes.",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Define success metrics and calculation methodologies\n2. Create data access layer for success rate data\n3. Implement time-series analysis for trend reporting\n4. Develop API endpoint for success rate data\n5. Create comparative analysis features (e.g., team vs team, period vs period)\n6. Design UI component with success rate visualizations\n7. Add configurable thresholds and alerts for below-target rates",
-            "status": "pending"
-          },
-          {
-            "id": 5,
-            "title": "Implement Export Functionality",
-            "description": "Develop export capabilities for all reports in multiple formats (PDF, Excel, CSV).",
-            "dependencies": [
-              2,
-              3,
-              4
-            ],
-            "details": "1. Research and select appropriate export libraries\n2. Implement PDF generation service\n3. Develop Excel/CSV export functionality\n4. Create unified export API endpoint\n5. Design export configuration UI (format selection, included fields)\n6. Implement background processing for large exports\n7. Add email delivery option for completed exports",
-            "status": "pending"
-          },
-          {
-            "id": 6,
-            "title": "Implement Automated Report Delivery",
-            "description": "Develop scheduling and automated delivery system for reports via email and other channels.",
-            "dependencies": [
-              5
-            ],
-            "details": "1. Design report scheduling interface\n2. Implement cron-based scheduling system\n3. Create email template system for report delivery\n4. Develop notification service integration\n5. Implement recipient management (individuals and groups)\n6. Add delivery confirmation and tracking\n7. Create audit logging for all automated deliveries",
-            "status": "pending"
-          },
-          {
-            "id": 7,
-            "title": "Implement Data Visualization Components",
-            "description": "Develop reusable visualization components for all reports including charts, graphs, and interactive dashboards.",
-            "dependencies": [
-              2,
-              3,
-              4
-            ],
-            "details": "1. Research and select visualization libraries\n2. Implement chart components (bar, line, pie, etc.)\n3. Create dashboard layout system\n4. Develop interactive filtering capabilities\n5. Implement drill-down functionality for detailed data exploration\n6. Add responsive design for mobile viewing\n7. Create theme customization options for visualizations",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "id": 12,
-        "title": "Settings Management Module",
-        "description": "Implement dynamic configuration for priority levels, market segments, distributor options, and other system settings.",
-        "details": "1. Create Filament resource for Settings\n```bash\nphp artisan make:filament-resource Setting\n```\n\n2. Implement settings management for:\n   - Priority levels (A-D, colors)\n   - Market segments\n   - Distributor options\n   - Contact roles\n   - Interaction types\n   - Sales stages\n   - Brands\n   - Custom dropdowns\n\n3. Create settings service provider for application-wide access\n```php\nclass SettingsServiceProvider extends ServiceProvider\n{\n    public function register()\n    {\n        $this->app->singleton('settings', function ($app) {\n            return new SettingsManager();\n        });\n    }\n}\n```\n\n4. Implement settings cache for performance optimization\n5. Create settings facade for easy access\n6. Add settings synchronization with form fields throughout the application",
-        "testStrategy": "1. Test CRUD operations for settings\n2. Verify settings are correctly applied throughout the application\n3. Test settings cache performance\n4. Validate settings synchronization with form fields\n5. Test settings facade accessibility\n6. Verify settings persistence across application restarts",
-        "priority": "medium",
-        "dependencies": [
-          4
+          26,
+          27,
+          28,
+          29,
+          31
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 13,
-        "title": "Quick Add Menu Implementation",
-        "description": "Create an accessible quick add menu for adding organizations, contacts, interactions, and opportunities from any page.",
-        "details": "1. Create a global quick add button component using Alpine.js\n```html\n<div x-data=\"{ open: false }\" class=\"relative\">\n    <button @click=\"open = !open\" class=\"btn-primary rounded-full\">\n        <svg class=\"w-6 h-6\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M12 6v6m0 0v6m0-6h6m-6 0H6\"></path>\n        </svg>\n    </button>\n    \n    <div x-show=\"open\" @click.away=\"open = false\" class=\"absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50\">\n        <a href=\"{{ route('filament.resources.organizations.create') }}\" class=\"block px-4 py-2 hover:bg-gray-100\">Add Organization</a>\n        <a href=\"{{ route('filament.resources.contacts.create') }}\" class=\"block px-4 py-2 hover:bg-gray-100\">Add Contact</a>\n        <a href=\"{{ route('filament.resources.interactions.create') }}\" class=\"block px-4 py-2 hover:bg-gray-100\">Add Interaction</a>\n        <a href=\"{{ route('filament.resources.opportunities.create') }}\" class=\"block px-4 py-2 hover:bg-gray-100\">Add Opportunity</a>\n        <a href=\"#\" class=\"block px-4 py-2 hover:bg-gray-100\">Schedule Follow-up</a>\n    </div>\n</div>\n```\n\n2. Register the component in the Filament service provider\n3. Add the component to the Filament layout\n4. Implement quick forms for each entity type\n5. Create modal dialogs for quick entry\n6. Add keyboard shortcuts for quick access",
-        "testStrategy": "1. Test quick add menu accessibility from different pages\n2. Verify quick forms save data correctly\n3. Test modal dialog functionality\n4. Validate keyboard shortcuts work correctly\n5. Test menu positioning and responsiveness\n6. Verify form validation works in quick add forms",
+        "id": 33,
+        "title": "Implement Global Search Functionality",
+        "description": "Create a global search with sub-second response time across all entities",
+        "details": "1. Implement Laravel Scout with SQLite FTS extension\n2. Configure searchable models (Organization, Contact, Interaction, Opportunity, Principal, ProductLine)\n3. Create global search component in Filament\n4. Implement type-ahead suggestions\n5. Add result categorization by entity type\n6. Implement highlighting of search terms in results\n7. Create detailed search results page\n8. Add filtering options to search results\n9. Implement search history\n10. Optimize indexes for sub-second performance\n11. Add search analytics to track common searches",
+        "testStrategy": "1. Test search functionality with various queries\n2. Measure search response time to ensure sub-second target\n3. Verify type-ahead suggestions work correctly\n4. Test result categorization and highlighting\n5. Verify filtering options work on search results\n6. Test search with high volume of records\n7. Verify search analytics are captured correctly",
+        "priority": "medium",
+        "dependencies": [
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 34,
+        "title": "Create Data Import/Export System",
+        "description": "Implement Excel import and export functionality for all entities with validation and error handling",
+        "details": "1. Implement Laravel Excel package\n2. Create import/export classes for each entity\n3. Implement validation during import\n4. Create error handling and reporting for failed imports\n5. Add progress tracking for large imports\n6. Implement batch processing for performance\n7. Create template downloads for each entity\n8. Add column mapping functionality for flexible imports\n9. Implement export customization options\n10. Create import/export history tracking",
+        "testStrategy": "1. Test import functionality with valid and invalid data\n2. Verify validation rules are applied during import\n3. Test error handling and reporting\n4. Verify progress tracking works for large imports\n5. Test export functionality with various options\n6. Verify template downloads contain correct headers\n7. Test column mapping with mismatched headers",
+        "priority": "medium",
+        "dependencies": [
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 35,
+        "title": "Implement Quick Add Menu",
+        "description": "Create an accessible quick add menu for common entities that can be accessed from anywhere in the application",
+        "details": "1. Create global quick add component in Filament\n2. Implement simplified forms for quick entry of:\n   - Organizations\n   - Contacts\n   - Interactions\n   - Opportunities\n3. Add keyboard shortcuts for quick access\n4. Implement form validation\n5. Create success notifications\n6. Add recently used items to quick add menu\n7. Implement user-specific menu customization\n8. Create animation for smooth user experience",
+        "testStrategy": "1. Test quick add functionality for each entity\n2. Verify validation works correctly\n3. Test keyboard shortcuts\n4. Verify success notifications appear\n5. Test recently used items functionality\n6. Verify user customization persists correctly\n7. Test from different pages in the application",
         "priority": "low",
         "dependencies": [
-          6,
-          7,
-          8,
-          9
+          26,
+          27,
+          28,
+          29
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 14,
-        "title": "Search Functionality Implementation",
-        "description": "Implement global search with sub-second response time for organizations, contacts, interactions, and opportunities.",
-        "details": "1. Create a global search service\n```php\nclass GlobalSearchService\n{\n    public function search(string $query)\n    {\n        return [\n            'organizations' => $this->searchOrganizations($query),\n            'contacts' => $this->searchContacts($query),\n            'interactions' => $this->searchInteractions($query),\n            'opportunities' => $this->searchOpportunities($query),\n        ];\n    }\n    \n    private function searchOrganizations(string $query)\n    {\n        return Organization::where('name', 'like', \"%{$query}%\")\n            ->orWhere('notes', 'like', \"%{$query}%\")\n            ->limit(5)\n            ->get();\n    }\n    \n    // Similar methods for other entities\n}\n```\n\n2. Create a Livewire component for the search interface\n```bash\nphp artisan make:livewire GlobalSearch\n```\n\n3. Implement debounced search input with Alpine.js\n4. Create search results display with categorized results\n5. Add database indexes to ensure <1s response time\n6. Implement search result highlighting\n7. Add keyboard navigation for search results",
-        "testStrategy": "1. Test search performance to ensure <1s requirement\n2. Verify search results accuracy\n3. Test search with different entity types\n4. Validate debounced input functionality\n5. Test keyboard navigation\n6. Verify search result highlighting works correctly",
-        "priority": "medium",
-        "dependencies": [
-          6,
-          7,
-          8,
-          9
-        ],
-        "status": "pending",
-        "subtasks": []
-      },
-      {
-        "id": 15,
-        "title": "Profile and Settings Page Implementation",
-        "description": "Create user profile and settings page for updating account information, notification preferences, and dashboard layout.",
-        "details": "1. Create Filament page for user profile\n```bash\nphp artisan make:filament-page Profile\n```\n\n2. Implement form for updating user information\n```php\nprotected function getFormSchema(): array\n{\n    return [\n        Forms\\Components\\Card::make()\n            ->schema([\n                Forms\\Components\\TextInput::make('name')\n                    ->required()\n                    ->maxLength(255),\n                Forms\\Components\\TextInput::make('email')\n                    ->email()\n                    ->required()\n                    ->maxLength(255),\n                Forms\\Components\\FileUpload::make('avatar')\n                    ->image()\n                    ->directory('avatars'),\n            ]),\n        Forms\\Components\\Card::make('Password')\n            ->schema([\n                Forms\\Components\\TextInput::make('current_password')\n                    ->password()\n                    ->required()\n                    ->rule('current_password'),\n                Forms\\Components\\TextInput::make('password')\n                    ->password()\n                    ->required()\n                    ->rule('confirmed'),\n                Forms\\Components\\TextInput::make('password_confirmation')\n                    ->password()\n                    ->required(),\n            ]),\n        Forms\\Components\\Card::make('Preferences')\n            ->schema([\n                Forms\\Components\\Toggle::make('email_notifications'),\n                Forms\\Components\\Select::make('dashboard_layout')\n                    ->options([\n                        'default' => 'Default',\n                        'compact' => 'Compact',\n                        'expanded' => 'Expanded',\n                    ]),\n            ]),\n    ];\n}\n```\n\n3. Create user preferences storage\n4. Implement notification preferences management\n5. Add dashboard layout customization\n6. Create personal task list management\n7. Implement personal goals tracking",
-        "testStrategy": "1. Test profile update functionality\n2. Verify password change works correctly\n3. Test notification preferences are saved and applied\n4. Validate dashboard layout customization\n5. Test personal task list management\n6. Verify personal goals tracking works correctly",
+        "id": 36,
+        "title": "Develop User Profile and Settings Pages",
+        "description": "Create user profile management and personal settings pages for customization",
+        "details": "1. Create user profile page in Filament\n2. Implement form for updating profile information\n3. Add avatar upload functionality\n4. Create personal settings page\n5. Implement theme customization options\n6. Add notification preferences\n7. Create dashboard widget preferences\n8. Implement language selection\n9. Add password change functionality\n10. Create activity log for user",
+        "testStrategy": "1. Test profile update functionality\n2. Verify avatar upload and display\n3. Test personal settings changes\n4. Verify theme customization works correctly\n5. Test notification preferences are respected\n6. Verify dashboard widget preferences persist\n7. Test password change functionality",
         "priority": "low",
         "dependencies": [
-          2
+          24,
+          25
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 16,
-        "title": "Data Import/Export System",
-        "description": "Implement functionality for importing data from Excel and exporting to Excel, CSV, and PDF formats.",
-        "details": "1. Create import service for Excel data\n```php\nclass ExcelImportService\n{\n    public function importOrganizations(UploadedFile $file)\n    {\n        $import = new OrganizationsImport();\n        Excel::import($import, $file);\n        \n        return $import->getRowCount();\n    }\n    \n    // Similar methods for other entities\n}\n```\n\n2. Create Excel import classes for each entity\n```php\nclass OrganizationsImport implements ToModel, WithHeadingRow\n{\n    private $rowCount = 0;\n    \n    public function model(array $row)\n    {\n        $this->rowCount++;\n        \n        return new Organization([\n            'name' => $row['name'],\n            'priority' => $row['priority'] ?? 'C',\n            'market_segment' => $row['market_segment'],\n            'distributor' => $row['distributor'],\n            // Map other fields\n        ]);\n    }\n    \n    public function getRowCount()\n    {\n        return $this->rowCount;\n    }\n}\n```\n\n3. Implement export functionality for Excel, CSV, and PDF\n4. Create import/export UI in Filament\n5. Add validation for imported data\n6. Implement error handling and reporting for imports\n7. Create data mapping configuration for flexible imports",
-        "testStrategy": "1. Test import functionality with sample Excel files\n2. Verify export to Excel, CSV, and PDF formats\n3. Test validation of imported data\n4. Validate error handling and reporting\n5. Test data mapping configuration\n6. Verify large file handling performance",
-        "priority": "medium",
-        "dependencies": [
-          6,
-          7,
-          8,
-          9
-        ],
-        "status": "pending",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Implement Excel Import Service",
-            "description": "Create a core service to handle Excel file parsing and initial data extraction",
-            "dependencies": [],
-            "details": "1. Implement ExcelImportService class using Apache POI library\n2. Create methods to read both .xls and .xlsx formats\n3. Develop row and cell iteration utilities\n4. Add header row detection and column mapping functionality\n5. Implement batch processing for large files\n6. Create memory-efficient streaming reader for very large files\n7. Add logging for import operations",
-            "status": "pending"
-          },
-          {
-            "id": 2,
-            "title": "Develop Entity-Specific Import Classes",
-            "description": "Create specialized import handlers for each entity type in the system",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Create abstract BaseEntityImporter class with common functionality\n2. Implement concrete importers for each entity type (User, Product, Order, etc.)\n3. Add entity-specific validation rules in each importer\n4. Implement database transaction handling for each entity import\n5. Create rollback mechanisms for failed imports\n6. Add support for relationships between imported entities\n7. Implement duplicate detection and handling strategies",
-            "status": "pending"
-          },
-          {
-            "id": 3,
-            "title": "Build Export Functionality for Multiple Formats",
-            "description": "Implement export capabilities for Excel, CSV, and PDF formats",
-            "dependencies": [],
-            "details": "1. Create ExportService interface with common export methods\n2. Implement ExcelExportService using Apache POI\n3. Develop CSVExportService for comma-separated exports\n4. Add PDFExportService using a PDF generation library\n5. Implement formatting options for each export type\n6. Add support for custom headers and column selection\n7. Create progress tracking for large exports\n8. Implement asynchronous export for large datasets",
-            "status": "pending"
-          },
-          {
-            "id": 4,
-            "title": "Create Import/Export User Interface",
-            "description": "Design and implement UI components for import and export operations",
-            "dependencies": [
-              1,
-              3
-            ],
-            "details": "1. Create file upload component with drag-and-drop support\n2. Implement import configuration screen with mapping options\n3. Design export configuration UI with format and field selection\n4. Add progress indicators for long-running operations\n5. Implement preview functionality for imports\n6. Create results screen showing success/failure statistics\n7. Add downloadable error reports for failed imports\n8. Implement saved configuration profiles for repeated imports/exports",
-            "status": "pending"
-          },
-          {
-            "id": 5,
-            "title": "Implement Validation and Error Handling",
-            "description": "Create robust validation and error handling for the import/export system",
-            "dependencies": [
-              1,
-              2,
-              3
-            ],
-            "details": "1. Implement pre-import validation to catch errors early\n2. Create detailed error collection during import process\n3. Design error reporting system with line numbers and reasons\n4. Add support for warning vs. critical error classification\n5. Implement partial imports with error skipping options\n6. Create exportable error report for users to fix and re-import\n7. Add data type validation and conversion utilities\n8. Implement custom validation rules configuration",
-            "status": "pending"
-          },
-          {
-            "id": 6,
-            "title": "Develop Data Mapping Configuration System",
-            "description": "Create a flexible system for mapping between file columns and database fields",
-            "dependencies": [
-              1,
-              2,
-              4
-            ],
-            "details": "1. Design mapping configuration data structure\n2. Implement UI for visual column-to-field mapping\n3. Create saved mapping profiles feature\n4. Add support for default mappings based on header names\n5. Implement data transformation rules within mappings\n6. Add support for composite mappings (multiple columns to one field)\n7. Create validation for mapping configurations\n8. Implement import templates generation based on mappings",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "id": 17,
-        "title": "Email and Calendar Integration",
-        "description": "Implement integration with email and calendar systems for tracking interactions and scheduling follow-ups.",
-        "details": "1. Create email service integration\n```php\nclass EmailService\n{\n    public function sendEmail(Contact $contact, string $subject, string $body)\n    {\n        Mail::to($contact->email)\n            ->send(new ContactEmail($subject, $body));\n            \n        // Create interaction record\n        Interaction::create([\n            'organization_id' => $contact->organization_id,\n            'contact_id' => $contact->id,\n            'type' => 'Email',\n            'interaction_date' => now(),\n            'notes' => \"Subject: {$subject}\\n\\n{$body}\",\n        ]);\n    }\n}\n```\n\n2. Implement calendar event creation and synchronization\n3. Create email templates for common communications\n4. Add email tracking functionality\n5. Implement follow-up reminders via email\n6. Create calendar view of scheduled interactions\n7. Add iCalendar export for follow-ups",
-        "testStrategy": "1. Test email sending functionality\n2. Verify interaction records are created for emails\n3. Test calendar event creation and synchronization\n4. Validate email templates work correctly\n5. Test follow-up reminders\n6. Verify calendar view displays correctly",
+        "id": 37,
+        "title": "Implement Email and Calendar Integration",
+        "description": "Create integration with email and calendar systems for communication and scheduling",
+        "details": "1. Implement email sending functionality\n2. Create email templates for common communications\n3. Add email tracking and history\n4. Implement calendar event creation\n5. Create calendar sync with external calendars\n6. Add email notifications for important events\n7. Implement meeting scheduling functionality\n8. Create email threading with interactions\n9. Add calendar widget for dashboard\n10. Implement reminder system",
+        "testStrategy": "1. Test email sending functionality\n2. Verify email templates render correctly\n3. Test email tracking and history\n4. Verify calendar event creation\n5. Test calendar sync with external calendars\n6. Verify email notifications are sent correctly\n7. Test meeting scheduling functionality",
         "priority": "low",
         "dependencies": [
-          8
+          28
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 18,
-        "title": "Azure Deployment Configuration",
-        "description": "Configure Azure App Service with SQLite database and networking for production deployment within the $18/month budget constraint.",
-        "details": "1. Create Azure App Service (Linux) plan\n   - Select B1 Basic tier ($13.14/month) with 1 core, 1.75 GB RAM\n   - Configure PHP 8.2 runtime\n\n2. Configure SQLite database with persistent storage\n   - Ensure SQLite database file is included in deployment\n   - Configure proper file permissions for database access\n   - Set up backup strategy for SQLite file\n\n3. Configure deployment from GitHub\n   - Set up GitHub Actions workflow\n   ```yaml\n   name: Deploy to Azure\n   on:\n     push:\n       branches: [ main ]\n   jobs:\n     build-and-deploy:\n       runs-on: ubuntu-latest\n       steps:\n       - uses: actions/checkout@v2\n       - name: Setup PHP\n         uses: shivammathur/setup-php@v2\n         with:\n           php-version: '8.2'\n       - name: Install Dependencies\n         run: composer install --no-dev --optimize-autoloader\n       - name: Deploy to Azure\n         uses: azure/webapps-deploy@v2\n         with:\n           app-name: kitchen-pantry-crm\n           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}\n   ```\n\n4. Configure environment variables in Azure App Service\n5. Set up SSL certificate\n6. Configure SQLite database path\n7. Set up Azure Monitor for basic monitoring\n8. Configure backup schedule",
-        "testStrategy": "1. Test deployment process end-to-end\n2. Verify application runs correctly on Azure\n3. Test database connectivity\n4. Validate SSL configuration\n5. Monitor resource usage to ensure it stays within budget\n6. Test backup and restore process",
+        "id": 38,
+        "title": "Configure Azure App Service Deployment",
+        "description": "Set up production deployment on Azure App Service within the $18/month budget constraint",
+        "details": "1. Create Azure account and configure subscription\n2. Set up Azure App Service plan within $18/month budget\n3. Configure deployment from Git repository\n4. Set up environment variables for production\n5. Configure SQLite database in production\n6. Implement backup strategy\n7. Set up SSL certificate\n8. Configure custom domain\n9. Implement logging and monitoring\n10. Create deployment documentation",
+        "testStrategy": "1. Test deployment process\n2. Verify application works correctly in production\n3. Test SSL certificate and custom domain\n4. Verify environment variables are set correctly\n5. Test backup and restore process\n6. Monitor performance to ensure it meets requirements\n7. Verify costs stay within $18/month budget",
         "priority": "high",
         "dependencies": [
-          1
+          21,
+          22
         ],
         "status": "pending",
         "subtasks": []
       },
       {
-        "id": 19,
-        "title": "Performance Optimization",
-        "description": "Optimize application performance to meet sub-second search, 2-second page load, and 10-second report generation requirements.",
-        "details": "1. Implement database query optimization\n   - Add indexes for frequently queried fields\n   - Optimize JOIN operations\n   - Use eager loading for relationships\n\n2. Implement caching strategy\n   - Use Laravel's cache for frequently accessed data\n   - Cache settings and configuration options\n   - Implement query result caching\n\n3. Optimize Filament resources\n   - Use deferred loading for resource relations\n   - Implement pagination for large datasets\n   - Use lazy loading for images and heavy content\n\n4. Implement front-end performance optimizations\n   - Minify CSS and JavaScript\n   - Optimize asset loading\n   - Implement lazy loading for components\n\n5. Configure database connection pooling\n6. Implement query monitoring and logging for slow queries\n7. Set up performance testing suite",
-        "testStrategy": "1. Benchmark search performance to ensure <1s requirement\n2. Test page load times to ensure <2s requirement\n3. Benchmark report generation to ensure <10s requirement\n4. Use Laravel Debugbar to identify slow queries\n5. Test application under load with multiple concurrent users\n6. Monitor memory usage and optimize where necessary",
+        "id": 39,
+        "title": "Implement Data Migration from Excel",
+        "description": "Create and execute data migration from existing Excel system with 100% accuracy",
+        "details": "1. Analyze existing Excel data structure\n2. Create mapping between Excel and database schema\n3. Implement data transformation logic\n4. Create validation rules for migrated data\n5. Implement dry-run functionality\n6. Add detailed logging of migration process\n7. Create data verification reports\n8. Implement rollback capability\n9. Add progress tracking for migration\n10. Create post-migration verification tools",
+        "testStrategy": "1. Test migration with sample data\n2. Verify all data is correctly transformed\n3. Test validation rules catch invalid data\n4. Verify dry-run functionality works correctly\n5. Test rollback capability\n6. Verify 100% accuracy with data verification reports\n7. Test with full dataset before production migration",
+        "priority": "high",
+        "dependencies": [
+          22,
+          23,
+          34
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 40,
+        "title": "Perform Performance Optimization",
+        "description": "Optimize application for sub-second search, 2-second page loads, and 10-second report generation",
+        "details": "1. Implement database query optimization\n2. Add database indexes for common queries\n3. Implement caching strategy\n4. Optimize Eloquent queries with eager loading\n5. Implement asset minification and bundling\n6. Add lazy loading for images\n7. Implement pagination optimization\n8. Create performance monitoring tools\n9. Optimize Filament resources\n10. Implement database query logging and analysis\n11. Add performance testing suite",
+        "testStrategy": "1. Measure search response time to ensure sub-second target\n2. Test page load times to ensure 2-second target\n3. Measure report generation time to ensure 10-second target\n4. Use profiling tools to identify bottlenecks\n5. Test with simulated high load\n6. Verify caching works correctly\n7. Monitor performance in production environment",
         "priority": "medium",
         "dependencies": [
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          14
-        ],
-        "status": "pending",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Database Query Optimization",
-            "description": "Analyze and optimize slow database queries to improve overall application performance.",
-            "dependencies": [],
-            "details": "1. Run EXPLAIN on all complex queries to identify bottlenecks\n2. Add appropriate indexes to tables with frequent searches\n3. Rewrite inefficient queries using joins instead of subqueries where possible\n4. Implement pagination for large result sets\n5. Use eager loading to prevent N+1 query problems\n6. Optimize ORDER BY clauses with appropriate indexes\n7. Consider denormalizing critical tables for read-heavy operations",
-            "status": "pending"
-          },
-          {
-            "id": 2,
-            "title": "Implement Caching Strategy",
-            "description": "Design and implement a comprehensive caching strategy to reduce database load and improve response times.",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Implement Redis for application-wide caching\n2. Cache frequently accessed data (user profiles, common lookups)\n3. Set up query result caching for expensive operations\n4. Implement cache invalidation strategies for data modifications\n5. Configure appropriate TTL (Time To Live) for different cache types\n6. Add cache warming for critical data on application startup\n7. Implement cache tags for selective invalidation",
-            "status": "pending"
-          },
-          {
-            "id": 3,
-            "title": "Filament Resource Optimization",
-            "description": "Optimize Filament admin panel resources to improve admin interface performance.",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Lazy load relationships in Filament resources\n2. Implement custom lightweight resources for frequently accessed panels\n3. Optimize resource policies to reduce authorization overhead\n4. Configure appropriate page size for resource listings\n5. Implement custom caching for Filament forms and tables\n6. Optimize resource widgets to reduce database queries\n7. Use deferred loading for complex resource components",
-            "status": "pending"
-          },
-          {
-            "id": 4,
-            "title": "Frontend Performance Optimization",
-            "description": "Improve frontend asset loading and rendering performance.",
-            "dependencies": [],
-            "details": "1. Implement asset bundling and minification\n2. Configure proper cache headers for static assets\n3. Implement lazy loading for images and heavy components\n4. Optimize JavaScript execution with code splitting\n5. Implement critical CSS loading\n6. Configure content compression (Gzip/Brotli)\n7. Implement service workers for asset caching\n8. Optimize web fonts loading strategy",
-            "status": "pending"
-          },
-          {
-            "id": 5,
-            "title": "Database Connection Pooling",
-            "description": "Implement and configure database connection pooling to optimize database resource usage.",
-            "dependencies": [
-              1
-            ],
-            "details": "1. Configure optimal connection pool size based on server resources\n2. Implement connection timeout and retry strategies\n3. Set up connection validation to prevent stale connections\n4. Configure separate read/write connection pools if using replication\n5. Implement connection monitoring and logging\n6. Set up proper connection release in application code\n7. Configure connection pool for peak load handling",
-            "status": "pending"
-          },
-          {
-            "id": 6,
-            "title": "Query Monitoring System",
-            "description": "Implement a system to monitor and log slow queries for continuous optimization.",
-            "dependencies": [
-              1,
-              5
-            ],
-            "details": "1. Configure MySQL/PostgreSQL slow query logging\n2. Implement application-level query timing\n3. Set up alerts for queries exceeding performance thresholds\n4. Create a dashboard for monitoring query performance\n5. Implement periodic query analysis reports\n6. Set up logging for query patterns and frequencies\n7. Configure automated suggestions for query optimization",
-            "status": "pending"
-          },
-          {
-            "id": 7,
-            "title": "Performance Testing and Benchmarking",
-            "description": "Develop and execute comprehensive performance tests to validate optimizations against requirements.",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6
-            ],
-            "details": "1. Set up JMeter or K6 for load testing\n2. Create test scenarios for key user journeys\n3. Implement benchmarking for critical operations (search, page load, report generation)\n4. Configure CI/CD pipeline integration for performance tests\n5. Establish performance baselines and improvement targets\n6. Implement A/B testing for optimization strategies\n7. Create detailed performance reports comparing before/after metrics",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "id": 20,
-        "title": "Data Migration from Excel",
-        "description": "Implement data migration process from existing Excel-based system with 100% accuracy requirement.",
-        "details": "1. Analyze existing Excel structure\n2. Create mapping between Excel columns and database fields\n3. Implement data validation and cleaning process\n4. Create migration script\n```php\nclass ExcelMigrationService\n{\n    public function migrateData(string $filePath)\n    {\n        DB::beginTransaction();\n        \n        try {\n            $this->migrateOrganizations($filePath);\n            $this->migrateContacts($filePath);\n            $this->migrateInteractions($filePath);\n            $this->migrateOpportunities($filePath);\n            \n            DB::commit();\n            return true;\n        } catch (\\Exception $e) {\n            DB::rollBack();\n            Log::error('Migration failed: ' . $e->getMessage());\n            return false;\n        }\n    }\n    \n    private function migrateOrganizations(string $filePath)\n    {\n        $organizations = Excel::toCollection(new OrganizationImport(), $filePath)[0];\n        \n        foreach ($organizations as $row) {\n            // Map and validate data\n            // Create organization record\n        }\n    }\n    \n    // Similar methods for other entities\n}\n```\n\n5. Implement verification process to ensure 100% accuracy\n6. Create rollback mechanism for failed migrations\n7. Add reporting for migration results\n8. Implement data reconciliation tools",
-        "testStrategy": "1. Test migration with sample Excel data\n2. Verify data accuracy with automated comparison\n3. Test edge cases and data format variations\n4. Validate rollback mechanism works correctly\n5. Test migration reporting\n6. Perform end-to-end migration test with real data",
-        "priority": "high",
-        "dependencies": [
-          3,
-          4,
-          16
+          30,
+          32,
+          33,
+          38,
+          39
         ],
         "status": "pending",
         "subtasks": []
@@ -677,7 +295,7 @@
     ],
     "metadata": {
       "created": "2025-06-20T06:17:34.775Z",
-      "updated": "2025-06-20T06:17:34.776Z",
+      "updated": "2025-06-21T01:54:30.005Z",
       "description": "Tasks for master context"
     }
   }

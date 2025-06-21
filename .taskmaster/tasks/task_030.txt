@@ -1,0 +1,32 @@
+# Task ID: 30
+# Title: Implement Dashboard with Widgets
+# Status: pending
+# Dependencies: 26, 27, 28, 29
+# Priority: medium
+# Description: Create a personalized dashboard with widgets and quick views for key metrics and activities
+# Details:
+1. Create custom Filament dashboard
+2. Implement the following widgets:
+   - Recent interactions
+   - Upcoming opportunities by stage
+   - Organization count by priority
+   - Sales pipeline summary
+   - Activity calendar
+   - Quick add buttons
+3. Make widgets customizable and savable per user
+4. Implement widget refresh functionality
+5. Add filtering options to widgets
+6. Create dashboard layout manager
+7. Implement responsive design for all widgets
+8. Add export functionality for widget data
+9. Create dashboard state persistence
+10. Implement dashboard loading optimizations
+
+# Test Strategy:
+1. Test widget rendering and data accuracy
+2. Verify customization and saving works per user
+3. Test widget refresh functionality
+4. Verify filtering options work correctly
+5. Test responsive design on different screen sizes
+6. Verify export functionality works for all widgets
+7. Test dashboard loading performance

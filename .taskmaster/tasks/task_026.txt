@@ -1,0 +1,26 @@
+# Task ID: 26
+# Title: Build Organization Management Module
+# Status: pending
+# Dependencies: 23, 24, 25
+# Priority: high
+# Description: Implement CRUD functionality for managing organizations with priority classification and detailed information
+# Details:
+1. Create Filament resource for Organization model
+2. Implement list view with filtering, sorting, and search
+3. Create form with fields: name, address, phone, email, website, priority
+4. Add validation rules for all fields
+5. Implement soft deletes for organizations
+6. Create organization detail page with tabs for contacts, interactions, opportunities
+7. Add priority classification (high/medium/low) with color coding
+8. Implement bulk actions (delete, change priority)
+9. Add custom filters for priority levels
+10. Create organization import/export functionality
+
+# Test Strategy:
+1. Test CRUD operations for organizations
+2. Verify validation rules work correctly
+3. Test filtering, sorting, and search functionality
+4. Verify soft delete and restore operations
+5. Test priority classification changes
+6. Verify bulk actions work correctly
+7. Test import/export functionality

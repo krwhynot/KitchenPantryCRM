@@ -1,0 +1,28 @@
+# Task ID: 35
+# Title: Implement Quick Add Menu
+# Status: pending
+# Dependencies: 26, 27, 28, 29
+# Priority: low
+# Description: Create an accessible quick add menu for common entities that can be accessed from anywhere in the application
+# Details:
+1. Create global quick add component in Filament
+2. Implement simplified forms for quick entry of:
+   - Organizations
+   - Contacts
+   - Interactions
+   - Opportunities
+3. Add keyboard shortcuts for quick access
+4. Implement form validation
+5. Create success notifications
+6. Add recently used items to quick add menu
+7. Implement user-specific menu customization
+8. Create animation for smooth user experience
+
+# Test Strategy:
+1. Test quick add functionality for each entity
+2. Verify validation works correctly
+3. Test keyboard shortcuts
+4. Verify success notifications appear
+5. Test recently used items functionality
+6. Verify user customization persists correctly
+7. Test from different pages in the application
