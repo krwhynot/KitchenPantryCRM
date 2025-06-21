@@ -50,16 +50,16 @@ class User extends Authenticatable
 
     public function accounts(): HasMany
     {
-        return $this->hasMany(Account::class, 'userId');
+        return $this->hasMany(Account::class, 'user_id');
     }
 
     public function sessions(): HasMany
     {
-        return $this->hasMany(Session::class, 'userId');
+        return $this->hasMany(Session::class, 'user_id');
     }
 
     public function assignedLeads(): HasMany
     {
-        return $this->hasMany(Lead::class, 'assignedToId');
+        return $this->hasMany(Lead::class, 'assigned_to_id');
     }
 }

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('duration')->nullable(); // In minutes
             $table->enum('outcome', ['POSITIVE', 'NEUTRAL', 'NEGATIVE', 'FOLLOWUPNEEDED'])->nullable();
             $table->string('nextAction')->nullable();
-            $table->foreignUuid('organizationId')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('contactId')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUuid('organization_id')->constrained('organizations')->cascadeOnDelete();
+            $table->foreignUuid('contact_id')->nullable()->constrained('contacts')->nullOnDelete();
             $table->timestamps();
         });
     }

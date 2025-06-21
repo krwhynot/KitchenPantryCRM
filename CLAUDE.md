@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Laravel 12 application with Filament 3.3 admin panel, designed as a CRM system for food service businesses. The application manages Organizations, Contacts, Interactions, Opportunities, and Distributors with a focus on Azure deployment and PostgreSQL compatibility.
+This is a Laravel 12 application with Filament 3.3 admin panel, designed as a CRM system for food service businesses. The application manages Organizations, Contacts, Interactions, Opportunities, and Distributors with a focus on Azure deployment and SQLite database.
 
 [... existing content remains unchanged ...]
 

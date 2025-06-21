@@ -20,7 +20,7 @@ CORE TECHNOLOGIES
 ========================================================
 Backend Framework: Laravel 10.x
 Frontend Framework: Filament PHP v3.3+ (Admin Panel)
-Database: PostgreSQL (v13+)
+Database: SQLite
 Hosting: Azure App Service (Linux)
 Version Control: Git with GitHub
 

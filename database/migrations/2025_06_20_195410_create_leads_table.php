@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('source')->nullable();
             $table->string('status')->default('NEW');
             $table->text('notes')->nullable();
-            $table->foreignUuid('organizationId')->nullable()->constrained()->nullOnDelete();
-            $table->foreignUuid('assignedToId')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignUuid('organization_id')->nullable()->constrained('organizations')->nullOnDelete();
+            $table->foreignUuid('assigned_to_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }

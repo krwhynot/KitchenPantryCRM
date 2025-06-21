@@ -15,7 +15,7 @@
 			"complexityScore": 4,
 			"recommendedSubtasks": 4,
 			"expansionPrompt": "Break down the Project Setup and Repository Configuration task into 4 subtasks covering: 1) Laravel and Filament installation, 2) Database configuration, 3) Git repository setup, and 4) CI/CD configuration. Include detailed steps for each subtask.",
-			"reasoning": "This task involves standard setup procedures with well-documented steps. The complexity is moderate due to the need to configure multiple components (Laravel, Filament, PostgreSQL, Git, CI/CD) but follows established patterns. The task is well-defined with clear installation commands already provided."
+			"reasoning": "This task involves standard setup procedures with well-documented steps. The complexity is moderate due to the need to configure multiple components (Laravel, Filament, SQLite, Git, CI/CD) but follows established patterns. The task is well-defined with clear installation commands already provided."
 		},
 		{
 			"taskId": 2,

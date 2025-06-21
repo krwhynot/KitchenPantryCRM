@@ -11,13 +11,15 @@ class Lead extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = [];
+
     public function organization(): BelongsTo
     {
-        return $this->belongsTo(Organization::class, 'organizationId');
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
     public function assignedTo(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'assignedToId');
+        return $this->belongsTo(User::class, 'assigned_to_id');
     }
 }

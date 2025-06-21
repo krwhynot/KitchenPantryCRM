@@ -12,6 +12,15 @@ class Contact extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = [];
+
+    protected function casts(): array 
+    {
+        return [
+            'isPrimary' => 'boolean',
+        ];
+    }
+
     public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class, 'organization_id');
@@ -19,16 +28,16 @@ class Contact extends Model
 
     public function interactions(): HasMany
     {
-        return $this->hasMany(Interaction::class, 'contactId');
+        return $this->hasMany(Interaction::class, 'contact_id');
     }
 
     public function opportunities(): HasMany
     {
-        return $this->hasMany(Opportunity::class, 'contactId');
+        return $this->hasMany(Opportunity::class, 'contact_id');
     }
 
     public function contracts(): HasMany
     {
-        return $this->hasMany(Contract::class, 'contactId');
+        return $this->hasMany(Contract::class, 'contact_id');
     }
 }

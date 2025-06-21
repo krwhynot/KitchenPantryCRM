@@ -1,0 +1,119 @@
+# Laravel Framework Files
+bootstrap/cache/*
+storage/app/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+database/database.sqlite
+
+# Node.js Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Composer Dependencies
+vendor/
+composer.lock
+
+# Environment Configuration
+.env
+.env.local
+.env.production
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build and Compilation Files
+public/hot
+public/storage
+public/build/
+public/css/
+public/js/
+mix-manifest.json
+
+# Git Files
+.git/
+.gitignore
+
+# Testing and Coverage
+coverage/
+.phpunit.result.cache
+tests/_output/
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Laravel Specific
+.phpunit.cache
+storage/debugbar/
+
+# Documentation Build Files
+docs/_build/
+docs/.doctrees/
+
+# Backup Files
+*.bak
+*.backup
+
+# Archive Files
+*.zip
+*.tar.gz
+*.rar
+
+# Large Media Files
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mkv
+*.mp3
+*.wav
+*.flac
+*.aac
+
+# Database Files (except migrations and seeders)
+*.sql
+*.db
+*.sqlite3
+
+# Azure Deployment Files
+.azure/
+deploy.zip
+
+# Package Manager Lock Files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Cache Directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+
+# Error Logs
+error.log
+access.log
+laravel.log

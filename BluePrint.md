@@ -1,4 +1,4 @@
-# Detailed Laravel Filament CRM Implementation Blueprint for Azure with PostgreSQL Support
+# Detailed Laravel Filament CRM Implementation Blueprint for Azure with SQLite Database
 
 ## Phase 1: Environment Setup and Installation (Week 1)
 
@@ -53,29 +53,28 @@ php artisan make:filament-user
 
 This will prompt you to enter your name, email, and password for the admin account [^1][^3].
 
-## Phase 2: PostgreSQL Database Configuration (Week 1-2)
+## Phase 2: SQLite Database Configuration (Week 1-2)
 
-### Local PostgreSQL Setup
+### Local SQLite Setup
 
-For local development with PostgreSQL compatibility:
+For local development with SQLite database:
 
-1. Install PostgreSQL on your development machine [^5]
-2. Create a new database for your CRM project [^5]
-3. Update your `.env` file with PostgreSQL connection details:
+1. SQLite is included with PHP by default - no additional installation required
+2. Create the SQLite database file (or use the existing one):
+   ```bash
+   touch database/database.sqlite
+   ```
+3. Update your `.env` file with SQLite connection details:
 ```
-DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_DATABASE=foodservice_crm
-DB_USERNAME=postgres
-DB_PASSWORD=your_password
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
 ```
 
-This configuration sets up Laravel to use PostgreSQL locally, ensuring compatibility with your future Azure deployment [^5].
+This configuration sets up Laravel to use SQLite locally, providing a lightweight and portable database solution [^5].
 
 ### Database Migration Structure
 
-Create migrations for your core CRM entities with PostgreSQL compatibility in mind:
+Create migrations for your core CRM entities optimized for SQLite:
 
 ```bash
 php artisan make:migration create_organizations_table
@@ -85,7 +84,7 @@ php artisan make:migration create_opportunities_table
 php artisan make:migration create_distributors_table
 ```
 
-When defining your migrations, use PostgreSQL-compatible column types and constraints [^6]:
+When defining your migrations, use SQLite-compatible column types and constraints [^6]:
 
 ```php
 // Example for organizations table
@@ -94,13 +93,13 @@ Schema::create('organizations', function (Blueprint $table) {
     $table->string('name');
     $table->enum('priority', ['A', 'B', 'C', 'D']);
     $table->string('market_segment');
-    $table->jsonb('metadata')->nullable(); // PostgreSQL jsonb type for flexible data
+    $table->json('metadata')->nullable(); // SQLite json type for flexible data
     $table->timestamps();
     $table->softDeletes(); // For archiving instead of permanent deletion
 });
 ```
 
-The `jsonb` type is particularly useful in PostgreSQL for storing flexible metadata that can evolve with your business needs [^5][^6].
+The `json` type is useful in SQLite for storing flexible metadata that can evolve with your business needs [^5][^6].
 
 ## Phase 3: Filament Resource Generation (Week 2-3)
 
@@ -272,12 +271,8 @@ Set up environment variables in the Azure App Service:
 1. Navigate to your App Service in the Azure portal
 2. Go to Settings > Configuration > Application settings
 3. Add the following key-value pairs:
-    - `DB_CONNECTION`: pgsql
-    - `DB_HOST`: Your PostgreSQL server hostname
-    - `DB_PORT`: 5432
-    - `DB_DATABASE`: Your database name
-    - `DB_USERNAME`: Your database username
-    - `DB_PASSWORD`: Your database password
+    - `DB_CONNECTION`: sqlite
+    - `DB_DATABASE`: database/database.sqlite
     - `APP_KEY`: Your Laravel application key
     - `APP_ENV`: production
     - `APP_DEBUG`: false [^13][^14]

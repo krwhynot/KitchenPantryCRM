@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->foreignUuid('organizationId')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('contactId')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUuid('organization_id')->constrained('organizations')->cascadeOnDelete();
+            $table->foreignUuid('opportunity_id')->nullable()->constrained('opportunities')->nullOnDelete();
+            $table->foreignUuid('contact_id')->nullable()->constrained('contacts')->nullOnDelete();
             $table->text('details')->nullable();
-            $table->timestamp('startDate')->nullable();
-            $table->timestamp('endDate')->nullable();
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->string('status'); // E.g., 'ACTIVE', 'EXPIRED'
             $table->timestamps();
         });

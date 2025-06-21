@@ -11,13 +11,22 @@ class Interaction extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = [];
+
+    protected function casts(): array 
+    {
+        return [
+            'date' => 'datetime',
+        ];
+    }
+
     public function organization(): BelongsTo
     {
-        return $this->belongsTo(Organization::class, 'organizationId');
+        return $this->belongsTo(Organization::class, 'organization_id');
     }
 
     public function contact(): BelongsTo
     {
-        return $this->belongsTo(Contact::class, 'contactId');
+        return $this->belongsTo(Contact::class, 'contact_id');
     }
 }

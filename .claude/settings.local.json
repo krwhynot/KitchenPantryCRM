@@ -9,10 +9,6 @@
       "Bash(composer create-project:*)",
       "Bash(composer require:*)",
       "Bash(sudo systemctl start:*)",
-      "Bash(az postgres flexible-server list:*)",
-      "Bash(DB_SERVER_NAME=\"foodservice-crm-db-1750338802\")",
-      "Bash(DB_NAME=\"foodservice_crm\")",
-      "Bash(az postgres flexible-server db create:*)",
       "Bash(APP_SERVICE_PLAN=\"kitchenpantry-crm-plan\")",
       "Bash(az appservice plan create:*)",
       "Bash(APP_SERVICE_NAME=\"kitchenpantry-crm-app-1750338802\")",
@@ -52,7 +48,12 @@
       "Bash(npm install:*)",
       "Bash(npm run dev:*)",
       "Bash(find:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(touch:*)",
+      "Bash(rg:*)",
+      "mcp__Context7__resolve-library-id",
+      "mcp__Context7__get-library-docs",
+      "mcp__exa__web_search_exa"
     ]
   },
   "enabledMcpjsonServers": [

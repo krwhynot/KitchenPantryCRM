@@ -11,28 +11,30 @@ class Organization extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $guarded = [];
+
     public function contacts(): HasMany
     {
-        return $this->hasMany(Contact::class, 'organizationId');
+        return $this->hasMany(Contact::class, 'organization_id');
     }
 
     public function interactions(): HasMany
     {
-        return $this->hasMany(Interaction::class, 'organizationId');
+        return $this->hasMany(Interaction::class, 'organization_id');
     }
 
     public function opportunities(): HasMany
     {
-        return $this->hasMany(Opportunity::class, 'organizationId');
+        return $this->hasMany(Opportunity::class, 'organization_id');
     }
 
     public function leads(): HasMany
     {
-        return $this->hasMany(Lead::class, 'organizationId');
+        return $this->hasMany(Lead::class, 'organization_id');
     }
 
     public function contracts(): HasMany
     {
-        return $this->hasMany(Contract::class, 'organizationId');
+        return $this->hasMany(Contract::class, 'organization_id');
     }
 }

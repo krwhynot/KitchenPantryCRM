@@ -32,7 +32,7 @@ class ContactSeeder extends Seeder
         ]);
 
         Contact::create([
-            'organizationId' => $organizations->random()->id,
+            'organization_id' => $organizations->random()->id,
             'firstName' => 'Jane',
             'lastName' => 'Smith',
             'position' => 'Purchasing Manager',
@@ -42,7 +42,7 @@ class ContactSeeder extends Seeder
         ]);
 
         Contact::create([
-            'organizationId' => $organizations->random()->id,
+            'organization_id' => $organizations->random()->id,
             'firstName' => 'Peter',
             'lastName' => 'Jones',
             'position' => 'Head Chef',

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('opportunities', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->foreignUuid('organizationId')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('contactId')->nullable()->constrained()->nullOnDelete();
+            $table->foreignUuid('organization_id')->constrained('organizations')->cascadeOnDelete();
+            $table->foreignUuid('contact_id')->nullable()->constrained('contacts')->nullOnDelete();
             $table->float('value')->nullable();
             $table->string('stage')->default('PROSPECT');
             $table->integer('probability')->default(50);
