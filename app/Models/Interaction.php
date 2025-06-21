@@ -16,14 +16,21 @@ class Interaction extends Model
         'contact_id',
         'user_id',
         'type',
-        'date',
+        'subject',
         'notes',
+        'interactionDate',
+        'duration',
+        'outcome',
+        'priority',
+        'nextAction',
+        'follow_up_date',
     ];
 
     protected function casts(): array 
     {
         return [
-            'date' => 'datetime',
+            'interactionDate' => 'datetime',
+            'follow_up_date' => 'date',
         ];
     }
 
@@ -44,7 +51,7 @@ class Interaction extends Model
 
     public function scopeRecent($query)
     {
-        return $query->orderBy('date', 'desc');
+        return $query->orderBy('interactionDate', 'desc');
     }
 
     public function scopeByType($query, $type)
@@ -52,18 +59,80 @@ class Interaction extends Model
         return $query->where('type', $type);
     }
 
+    public function scopeByOutcome($query, $outcome)
+    {
+        return $query->where('outcome', $outcome);
+    }
+
     public function scopeForUser($query, $userId)
     {
         return $query->where('user_id', $userId);
     }
 
+    public function scopeForOrganization($query, $organizationId)
+    {
+        return $query->where('organization_id', $organizationId);
+    }
+
+    public function scopeRequiresFollowUp($query)
+    {
+        return $query->where('outcome', 'FOLLOWUPNEEDED')
+                    ->orWhereNotNull('follow_up_date');
+    }
+
+    public function scopeByPriority($query, $priority)
+    {
+        return $query->where('priority', $priority);
+    }
+
     public function getTypeLabelAttribute(): string
     {
-        return ucfirst(str_replace('_', ' ', $this->type));
+        return match($this->type) {
+            'CALL' => 'Phone Call',
+            'EMAIL' => 'Email',
+            'MEETING' => 'Meeting',
+            'VISIT' => 'Site Visit',
+            default => ucfirst(strtolower($this->type)),
+        };
+    }
+
+    public function getOutcomeLabelAttribute(): string
+    {
+        return match($this->outcome) {
+            'POSITIVE' => 'Positive',
+            'NEUTRAL' => 'Neutral',
+            'NEGATIVE' => 'Negative',
+            'FOLLOWUPNEEDED' => 'Follow-up Needed',
+            default => 'Not Set',
+        };
+    }
+
+    public function getPriorityLabelAttribute(): string
+    {
+        return ucfirst($this->priority);
     }
 
     public function getDateFormattedAttribute(): string
     {
-        return $this->date ? $this->date->format('M j, Y g:i A') : '';
+        return $this->interactionDate ? $this->interactionDate->format('M j, Y g:i A') : '';
+    }
+
+    public function getDurationFormattedAttribute(): string
+    {
+        if (!$this->duration) return 'Not specified';
+        
+        $hours = floor($this->duration / 60);
+        $minutes = $this->duration % 60;
+        
+        if ($hours > 0) {
+            return $hours . 'h ' . ($minutes > 0 ? $minutes . 'm' : '');
+        }
+        
+        return $minutes . ' minutes';
+    }
+
+    public function getContactDisplayNameAttribute(): string
+    {
+        return $this->contact ? $this->contact->full_name : 'No contact specified';
     }
 }

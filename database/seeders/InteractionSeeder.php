@@ -15,9 +15,15 @@ class InteractionSeeder extends Seeder
     public function run(): void
     {
         $contacts = Contact::with('organization')->get();
+        $firstUser = \App\Models\User::first();
 
         if ($contacts->isEmpty()) {
             $this->command->info('No contacts found, skipping interaction seeding.');
+            return;
+        }
+
+        if (!$firstUser) {
+            $this->command->info('No users found, skipping interaction seeding.');
             return;
         }
 
@@ -25,21 +31,29 @@ class InteractionSeeder extends Seeder
             Interaction::create([
                 'organization_id' => $contact->organization_id,
                 'contact_id' => $contact->id,
+                'user_id' => $firstUser->id,
                 'type' => 'EMAIL',
                 'subject' => 'Follow-up on our recent discussion',
-                'date' => now()->subDays(rand(1, 30)),
+                'notes' => 'Discussed their current challenges and potential solutions.',
+                'interactionDate' => now()->subDays(rand(1, 30)),
+                'duration' => 30,
                 'outcome' => 'POSITIVE',
+                'priority' => 'medium',
             ]);
 
             Interaction::create([
                 'organization_id' => $contact->organization_id,
                 'contact_id' => $contact->id,
+                'user_id' => $firstUser->id,
                 'type' => 'CALL',
                 'subject' => 'Quick check-in call',
-                'date' => now()->subDays(rand(1, 30)),
+                'notes' => 'Brief check-in to maintain relationship.',
+                'interactionDate' => now()->subDays(rand(1, 30)),
                 'duration' => 15,
                 'outcome' => 'NEUTRAL',
-                'nextAction' => 'Send proposal by EOD Friday.'
+                'priority' => 'low',
+                'nextAction' => 'Send proposal by EOD Friday.',
+                'follow_up_date' => now()->addDays(7),
             ]);
         }
     }

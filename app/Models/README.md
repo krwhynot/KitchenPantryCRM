@@ -8,6 +8,14 @@ Contains Eloquent models for the PantryCRM application, defining data structures
 ### Format: YYYY-MM-DD | filename | change_type | description
 
 ### Recent Changes
+- 2025-06-21 | OpportunityStageHistory.php | ADDED | Model for tracking opportunity stage transitions with user attribution and notes
+- 2025-06-21 | Opportunity.php | ENHANCED | Complete pipeline enhancement with stage tracking, probability calculations, and advanced scopes
+- 2025-06-21 | Interaction.php | ENHANCED | Complete optimization for 30-second entry with enhanced fields, scopes, and accessors
+- 2025-06-21 | InteractionResource.php | ENHANCED | Lightning-fast form design with smart defaults, context-aware pre-filling, and keyboard optimization
+- 2025-06-21 | InteractionExportAction.php | ADDED | Advanced export action with date ranges, filtering, and comprehensive metadata
+- 2025-06-21 | InteractionImportAction.php | ADDED | Smart import action supporting JSON/CSV with conflict resolution and data validation
+- 2025-06-21 | QuickInteractionModal.php | ADDED | Lightning-fast modal component for 15-20 second interaction entry with keyboard shortcuts
+- 2025-06-21 | QuickInteractionWidget.php | ADDED | Dashboard widget for immediate interaction logging with performance tracking
 - 2025-06-21 | Contact.php | ENHANCED | Added SoftDeletes trait for comprehensive contact delete management
 - 2025-06-21 | ContactResource.php | ENHANCED | Complete overhaul with 6-section organized forms, advanced filters, bulk actions, and soft deletes
 - 2025-06-21 | ContactExportAction.php | ADDED | Custom export action for contacts with JSON/CSV formats and comprehensive data
