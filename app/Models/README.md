@@ -8,6 +8,14 @@ Contains Eloquent models for the PantryCRM application, defining data structures
 ### Format: YYYY-MM-DD | filename | change_type | description
 
 ### Recent Changes
+- 2025-06-21 | PipelineSummaryWidget.php | ADDED | Comprehensive pipeline analytics widget with weighted forecasting and KPI tracking
+- 2025-06-21 | StageVelocityWidget.php | ADDED | Stage velocity analysis widget showing average time spent in each pipeline stage
+- 2025-06-21 | ConversionRateWidget.php | ADDED | Stage conversion rate widget with industry benchmarks and trend analysis
+- 2025-06-21 | ForecastAccuracyWidget.php | ADDED | Forecast vs actual revenue comparison widget for prediction reliability
+- 2025-06-21 | AtRiskDealsWidget.php | ADDED | At-risk opportunities table widget with automated risk factor detection
+- 2025-06-21 | DealFlowFunnelWidget.php | ADDED | Deal flow funnel visualization showing opportunity counts and values by stage
+- 2025-06-21 | OpportunityResource.php | ENHANCED | Advanced filtering with value ranges, probability thresholds, and activity tracking
+- 2025-06-21 | EditOpportunity.php | ENHANCED | Added stage transition actions and pipeline navigation to opportunity edit page
 - 2025-06-21 | OpportunityStageHistory.php | ADDED | Model for tracking opportunity stage transitions with user attribution and notes
 - 2025-06-21 | Opportunity.php | ENHANCED | Complete pipeline enhancement with stage tracking, probability calculations, and advanced scopes
 - 2025-06-21 | Interaction.php | ENHANCED | Complete optimization for 30-second entry with enhanced fields, scopes, and accessors

@@ -272,6 +272,62 @@ class OpportunityResource extends Resource
                 Tables\Filters\Filter::make('stale')
                     ->query(fn (Builder $query): Builder => $query->stale())
                     ->label('Stale (No activity 30+ days)'),
+                    
+                Tables\Filters\Filter::make('expected_close_this_month')
+                    ->query(fn (Builder $query): Builder => $query->expectedCloseThisMonth())
+                    ->label('Expected Close This Month'),
+                    
+                Tables\Filters\Filter::make('overdue')
+                    ->query(fn (Builder $query): Builder => $query->where('expectedCloseDate', '<', now())->where('status', 'open'))
+                    ->label('Overdue'),
+                    
+                Tables\Filters\Filter::make('value_range')
+                    ->form([
+                        Forms\Components\TextInput::make('value_from')
+                            ->label('Value From')
+                            ->numeric()
+                            ->prefix('$'),
+                        Forms\Components\TextInput::make('value_to')
+                            ->label('Value To')
+                            ->numeric()
+                            ->prefix('$'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['value_from'],
+                                fn (Builder $query, $value): Builder => $query->where('value', '>=', $value),
+                            )
+                            ->when(
+                                $data['value_to'],
+                                fn (Builder $query, $value): Builder => $query->where('value', '<=', $value),
+                            );
+                    })
+                    ->label('Value Range'),
+                    
+                Tables\Filters\Filter::make('probability_range')
+                    ->form([
+                        Forms\Components\Select::make('probability_min')
+                            ->label('Minimum Probability')
+                            ->options([
+                                '0' => '0%',
+                                '25' => '25%',
+                                '50' => '50%',
+                                '75' => '75%',
+                                '90' => '90%',
+                            ]),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query->when(
+                            $data['probability_min'],
+                            fn (Builder $query, $value): Builder => $query->where('probability', '>=', $value),
+                        );
+                    })
+                    ->label('High Probability'),
+                    
+                Tables\Filters\Filter::make('recent_activity')
+                    ->query(fn (Builder $query): Builder => $query->where('last_activity_date', '>=', now()->subDays(7)))
+                    ->label('Active This Week'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
