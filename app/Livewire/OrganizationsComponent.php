@@ -12,14 +12,12 @@ class OrganizationsComponent extends Component
 
     public $priorityFilter = '';
     public $segmentFilter = '';
-    public $distributorFilter = '';
     public $search = '';
 
     protected $queryString = [
         'search' => ['except' => ''],
         'priorityFilter' => ['except' => ''],
         'segmentFilter' => ['except' => ''],
-        'distributorFilter' => ['except' => ''],
     ];
 
     public function updatingSearch()
@@ -37,10 +35,6 @@ class OrganizationsComponent extends Component
         $this->resetPage();
     }
 
-    public function updatingDistributorFilter()
-    {
-        $this->resetPage();
-    }
 
     public function render()
     {
@@ -59,13 +53,10 @@ class OrganizationsComponent extends Component
             $query->where('segment', $this->segmentFilter);
         }
 
-        if ($this->distributorFilter) {
-            $query->where('distributor', $this->distributorFilter);
-        }
 
-        $organizations = $query->with(['contacts', 'interactions'])->orderBy('name')->paginate(10);
+        $organizations = $query->with(['contacts', 'interactions'])->orderBy('name')->paginate(15);
 
-        $filters = cache()->remember('organization_filters', 300, function () {
+        $filters = cache()->remember('organization_filters', 600, function () {
             $segments = Organization::query()
                 ->whereNotNull('segment')
                 ->distinct()
@@ -74,18 +65,9 @@ class OrganizationsComponent extends Component
                 ->sort()
                 ->all();
 
-            $distributors = Organization::query()
-                ->whereNotNull('distributor')
-                ->distinct()
-                ->pluck('distributor')
-                ->mapWithKeys(fn ($distributor) => [$distributor => $distributor])
-                ->sort()
-                ->all();
-
             return [
                 'priorities' => ['A' => 'Priority A', 'B' => 'Priority B', 'C' => 'Priority C'],
                 'segments' => $segments,
-                'distributors' => $distributors,
             ];
         });
 

@@ -92,9 +92,9 @@
                     <div class="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0">
                         <div>
                             <div class="text-sm font-medium text-gray-900">{{ $interaction->organization->name }}</div>
-                            <div class="text-xs text-gray-500">{{ $interaction->type }} - {{ $interaction->contact->name }}</div>
+                            <div class="text-xs text-gray-500">{{ $interaction->type }} - {{ $interaction->contact->first_name ?? 'N/A' }}</div>
                         </div>
-                        <div class="text-xs text-gray-500">{{ $interaction->date_formatted }}</div>
+                        <div class="text-xs text-gray-500">{{ $interaction->interaction_date->format('M j, Y') }}</div>
                     </div>
                 @empty
                     <div class="text-sm text-gray-500">No recent interactions</div>

@@ -107,7 +107,7 @@ class ActivityFeedWidget extends BaseWidget
             ->poll('30s'); // Auto-refresh every 30 seconds
     }
 
-    protected function getTableQuery(): ?\Illuminate\Database\Eloquent\Builder
+    public function getTableQuery(): \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation|null
     {
         $query = Interaction::with(['organization', 'contact', 'user']);
         

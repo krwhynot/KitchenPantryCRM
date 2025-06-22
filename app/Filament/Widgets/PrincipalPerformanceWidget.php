@@ -81,7 +81,7 @@ class PrincipalPerformanceWidget extends BaseWidget
             ->paginated([10, 25]);
     }
 
-    protected function getTableQuery(): ?\Illuminate\Database\Eloquent\Builder
+    public function getTableQuery(): \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation|null
     {
         return Principal::withCount('productLines')
             ->orderBy('product_lines_count', 'desc');

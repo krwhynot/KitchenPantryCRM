@@ -34,10 +34,6 @@ class ReportsComponent extends Component
                     ->groupBy('priority')
                     ->pluck('count', 'priority')
                     ->toArray(),
-                'by_distributor' => Organization::selectRaw('distributor, COUNT(*) as count')
-                    ->groupBy('distributor')
-                    ->pluck('count', 'distributor')
-                    ->toArray(),
             ],
             'contact_summary' => [
                 'total' => Contact::count(),
