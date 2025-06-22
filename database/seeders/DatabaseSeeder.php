@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // Seed CRM configuration first
             CrmDefaultSettingsSeeder::class,
+            PrincipalBrandSeeder::class,
             
             // Then seed actual data
             OrganizationSeeder::class,

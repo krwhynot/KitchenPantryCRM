@@ -1,0 +1,138 @@
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::main_seeder_executes_all_individual_seeders(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::seeder_is_idempotent_can_run_multiple_times(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::seeder_warms_cache_after_completion(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::seeder_uses_database_transactions(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::priority_levels_seeder_creates_correct_structure(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::sales_stages_seeder_creates_proper_pipeline(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::contact_roles_seeder_creates_restaurant_specific_roles(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::interaction_types_seeder_covers_all_communication_methods(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::market_segments_seeder_covers_food_service_industry(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::distributor_options_seeder_covers_supply_chain_types(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::all_seeders_create_settings_with_correct_metadata(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::seeder_validates_data_before_insertion(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::seeder_handles_different_environments(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::seeder_performance_is_optimized(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\Seeders\CrmDefaultSettingsSeederTest::seeder_integrates_with_settings_service(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                    0.17s  
+
+   FAIL  Tests\Unit\Models\ContactTest
+  ✓ contact belongs to organization                                     13.23s  
+  ⨯ contact has many interactions                                        1.11s  
+  ⨯ contact has many opportunities                                       0.60s  
+  ✓ full name accessor                                                   0.51s  
+  ✓ display name accessor                                                0.52s  
+  ✓ primary status accessor                                              0.53s  
+  ✓ contact info accessor                                                0.69s  
+  ✓ primary scope                                                        0.53s  
+  ✓ for organization scope                                               0.54s  
+  ✓ with email scope                                                     0.51s  
+  ✓ with phone scope                                                     0.53s  
+  ✓ fillable attributes                                                  0.54s  
+  ✓ casts are applied                                                    0.53s  
+
+   FAIL  Tests\Unit\Models\OpportunityTest
+  ⨯ opportunity belongs to organization                                  0.62s  
+  ⨯ opportunity belongs to contact                                       0.61s  
+  ⨯ opportunity belongs to user                                          0.60s  
+  ⨯ stage label accessor                                                 0.59s  
+  ⨯ status label accessor                                                0.63s  
+  ⨯ value formatted accessor                                             0.57s  
+  ⨯ expected close date formatted accessor                               0.60s  
+  ⨯ active scope                                                         0.58s  
+  ⨯ by stage scope                                                       0.59s  
+  ⨯ by status scope                                                      0.61s  
+  ⨯ assigned to scope                                                    0.58s  
+  ⨯ active opportunities scope                                           0.58s  
+  ⨯ fillable attributes                                                  0.60s  
+  ⨯ casts are applied                                                    0.59s  
+
+   FAIL  Tests\Unit\Models\OrganizationTest
+  ✓ organization has many contacts                                       0.61s  
+  ⨯ organization has many interactions                                   0.57s  
+  ⨯ organization has many opportunities                                  0.58s  
+  ✓ priority label accessor                                              0.46s  
+  ✓ type label accessor                                                  0.51s  
+  ✓ full address accessor                                                0.54s  
+  ✓ estimated revenue formatted accessor                                 0.55s  
+  ✓ by priority scope                                                    0.51s  
+  ✓ active scope                                                         0.54s  
+  ✓ by segment scope                                                     0.52s  
+  ✓ fillable attributes                                                  0.51s  
+  ⨯ casts are applied                                                    0.56s  
+
+   PASS  Tests\Unit\Models\PrincipalTest
+  ✓ principal has many product lines                                     0.56s  
+  ✓ contact display accessor                                             0.54s  
+  ✓ active scope                                                         0.44s  
+  ✓ fillable attributes                                                  0.41s  
+  ✓ model exists in database                                             0.51s  
+
+   PASS  Tests\Unit\Models\ProductLineTest
+  ✓ product line belongs to principal                                    0.49s  
+  ✓ status label accessor                                                0.49s  
+  ✓ active scope                                                         0.50s  
+  ✓ for principal scope                                                  0.83s  
+  ✓ fillable attributes                                                  0.53s  
+  ✓ casts are applied                                                    0.51s  
+  ✓ model exists in database                                             0.48s  
+
+   PASS  Tests\Unit\Models\SystemSettingTest
+  ✓ can create system setting with new fields                            0.57s  
+  ✓ application level type validation works                              0.51s  
+  ✓ caching performance optimization                                     0.56s  
+  ✓ cache invalidation on updates                                        0.62s  
+  ✓ typed value casting all types                                        0.58s  
+  ✓ performance optimized scopes use indexes                             0.58s  
+  ✓ set value validates allowed types                                    0.51s  
+  ✓ category caching optimization                                        0.50s  
+  ✓ scope by category filters correctly                                  0.51s  
+  ✓ get value static method returns typed value                          0.41s  
+  ✓ set value auto detects type                                          0.46s  
+  ✓ get by category returns keyed collection                             0.53s  
+  ✓ display value formats correctly                                      0.56s  
+  ✓ ordered scope sorts by sort order then key                           0.44s  
+  ✓ factory generates all setting types                                  0.52s  
+  ✓ crm category settings                                                0.53s  
+
+   PASS  Tests\Unit\Services\SettingsServiceTest
+  ✓ service is singleton                                                 0.65s  
+  ✓ can get setting value                                                0.45s  
+  ✓ get returns default when setting not found                           0.53s  
+  ✓ can set setting value                                                0.52s  
+  ✓ set auto detects type                                                0.53s  
+  ✓ set throws exception for invalid type                                0.51s  
+  ✓ can get settings by category                                         0.54s  
+  ✓ can get bulk settings                                                0.53s  
+  ✓ can set bulk settings                                                0.54s  
+  ✓ can get public settings                                              0.52s  
+  ✓ validation works                                                     0.73s  
+  ✓ validation returns true for settings without rules                   0.68s  
+  ✓ cache invalidation on set                                            0.50s  
+  ✓ flush clears all caches                                              0.51s  
+  ✓ get priority levels                                                  0.51s  
+  ✓ get sales stages                                                     0.53s  
+  ✓ get contact roles                                                    0.43s  
+  ✓ get interaction types                                                0.47s  
+  ✓ get market segments                                                  0.52s  
+  ✓ get distributor options                                              0.51s  
+  ✓ get crm options by type                                              0.51s  
+  ✓ get crm options throws exception for invalid type                    0.53s  
+  ✓ typed values are cast correctly                                      0.50s  
+  ✓ cache warming doesnt throw errors                                    0.51s  

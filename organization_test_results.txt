@@ -1,0 +1,466 @@
+
+   FAIL  Tests\Feature\Filament\OrganizationResourceTest
+  ⨯ can list organizations                                              24.42s  
+  ⨯ can create organization                                              9.10s  
+  ⨯ can edit organization                                                8.71s  
+  ⨯ can delete organization                                              5.79s  
+  ✓ can filter by priority                                               7.52s  
+  ⨯ can filter by type                                                   5.76s  
+  ⨯ can filter by status                                                 5.85s  
+  ⨯ can search organizations                                             5.93s  
+  ⨯ can search by email and phone                                        5.80s  
+  ⨯ bulk change priority action                                          5.93s  
+  ⨯ bulk change status action                                            5.61s  
+  ⨯ can bulk delete organizations                                        5.61s  
+  ✓ form validation works                                                7.81s  
+  ✓ unique name validation                                               7.81s  
+  ✓ unique email validation                                              7.97s  
+  ⨯ priority badge colors display correctly                              5.31s  
+  ⨯ type badge colors display correctly                                  6.38s  
+  ⨯ revenue formatting displays correctly                                6.25s  
+  ⨯ website url links work                                               8.06s  
+  ⨯ phone and email are copyable                                         5.58s  
+  ⨯ contact date color coding                                            5.44s  
+  ⨯ follow up date color coding                                          6.04s  
+  ✓ can view organization details                                       10.97s  
+  ⨯ organization with related records integration                        0.73s  
+  ⨯ soft delete and restore functionality                                5.49s  
+  ⨯ force delete functionality                                           4.79s  
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest > can create orga…   
+  Component has errors: "data.phone", "data.website"
+Failed asserting that false is true.
+
+  at vendor/livewire/livewire/src/Features/SupportValidation/TestsValidation.php:109
+    105▕     {
+    106▕         $errors = $this->errors();
+    107▕ 
+    108▕         if (empty($keys)) {
+  ➜ 109▕             PHPUnit::assertTrue($errors->isEmpty(), 'Component has errors: "'.implode('", "', $errors->keys()).'"');
+    110▕ 
+    111▕             return $this;
+    112▕         }
+    113▕
+
+      [2m+4 vendor frames [22m
+  5   tests/Feature/Filament/OrganizationResourceTest.php:59
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest > can edit organi…   
+  Component has errors: "data.phone", "data.website"
+Failed asserting that false is true.
+
+  at vendor/livewire/livewire/src/Features/SupportValidation/TestsValidation.php:109
+    105▕     {
+    106▕         $errors = $this->errors();
+    107▕ 
+    108▕         if (empty($keys)) {
+  ➜ 109▕             PHPUnit::assertTrue($errors->isEmpty(), 'Component has errors: "'.implode('", "', $errors->keys()).'"');
+    110▕ 
+    111▕             return $this;
+    112▕         }
+    113▕
+
+      [2m+4 vendor frames [22m
+  5   tests/Feature/Filament/OrganizationResourceTest.php:88
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:276
+    272▕                     
+    273▕                 Tables\Columns\TextColumn::make('status')
+    274▕                     ->badge()
+    275▕                     ->sortable()
+  ➜ 276▕                     ->color(fn (string $state): string => match ($state) {
+    277▕                         'ACTIVE' => 'success',
+    278▕                         'INACTIVE' => 'gray', 
+    279▕                         'PROSPECT' => 'warning',
+    280▕                     }),
+
+  1   app/Filament/Resources/OrganizationResource.php:276
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:276
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:276
+    272▕                     
+    273▕                 Tables\Columns\TextColumn::make('status')
+    274▕                     ->badge()
+    275▕                     ->sortable()
+  ➜ 276▕                     ->color(fn (string $state): string => match ($state) {
+    277▕                         'ACTIVE' => 'success',
+    278▕                         'INACTIVE' => 'gray', 
+    279▕                         'PROSPECT' => 'warning',
+    280▕                     }),
+
+  1   app/Filament/Resources/OrganizationResource.php:276
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:276
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:276
+    272▕                     
+    273▕                 Tables\Columns\TextColumn::make('status')
+    274▕                     ->badge()
+    275▕                     ->sortable()
+  ➜ 276▕                     ->color(fn (string $state): string => match ($state) {
+    277▕                         'ACTIVE' => 'success',
+    278▕                         'INACTIVE' => 'gray', 
+    279▕                         'PROSPECT' => 'warning',
+    280▕                     }),
+
+  1   app/Filament/Resources/OrganizationResource.php:276
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:276
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table interactions has no column named date (Connection: sqlite, SQL: insert into "interactions" ("organization_id", "contact_id", "user_id", "type", "date", "notes", "id", "updated_at", "created_at") values (019793de-c5da-7003-b61f-5ffd1f193b78, 019793de-c64f-723e-8947-8b85835b79c9, 019793de-c650-717a-830a-4cc2e220bbd7, Phone Call, 2025-04-28 07:13:16, Assumenda accusamus vel quis asperiores repudiandae. Reprehenderit odit id non laboriosam qui suscipit est. Doloremque ea quod deserunt omnis in voluptate. Reprehenderit tempora quam tempora laudantium aut magnam. Nam et hic quia maiores assumenda., 019793de-c661-7215-861c-27bd8f4f9294, 2025-06-21 19:02:20, 2025-06-21 19:02:20))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:822
+    818▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    819▕                 );
+    820▕             }
+    821▕ 
+  ➜ 822▕             throw new QueryException(
+    823▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    824▕             );
+    825▕         }
+    826▕     }
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/Filament/OrganizationResourceTest.php:379
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest >…   ViewException   
+  Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)
+
+  at app/Filament/Resources/OrganizationResource.php:224
+    220▕                 Tables\Columns\TextColumn::make('type')
+    221▕                     ->badge()
+    222▕                     ->searchable()
+    223▕                     ->sortable()
+  ➜ 224▕                     ->color(fn (string $state): string => match ($state) {
+    225▕                         'CLIENT' => 'success',
+    226▕                         'PROSPECT' => 'warning',
+    227▕                         'DISTRIBUTOR' => 'info',
+    228▕                         'SUPPLIER' => 'gray',
+
+  1   app/Filament/Resources/OrganizationResource.php:224
+      [2m+2 vendor frames [22m
+
+  4   app/Filament/Resources/OrganizationResource.php:224
+      NunoMaduro\Collision\Exceptions\TestException::("Unhandled match case '...' (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php) (View: /mnt/r/Projects/PantryCRM/vendor/filament/tables/resources/views/columns/text-column.blade.php)")
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\Filament\OrganizationResourceTest > force delete fu…   
+  Failed asserting that a row in the table [organizations] does not match the attributes {
+    "id": "019793de-de38-73e7-8202-a732bf0bad9c"
+}.
+
+Found similar results: [
+    {
+        "id": "019793de-de38-73e7-8202-a732bf0bad9c"
+    }
+].
+
+  at tests/Feature/Filament/OrganizationResourceTest.php:433
+    429▕         // Then force delete
+    430▕         Livewire::test(OrganizationResource\Pages\ListOrganizations::class)
+    431▕             ->callTableAction('forceDelete', $organization);
+    432▕ 
+  ➜ 433▕         $this->assertDatabaseMissing('organizations', ['id' => $organization->id]);
+    434▕     }
+    435▕ }
+
+
+  Tests:    21 failed, 5 passed (43 assertions)
+  Duration: 186.94s
+

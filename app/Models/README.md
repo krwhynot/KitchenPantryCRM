@@ -8,6 +8,11 @@ Contains Eloquent models for the PantryCRM application, defining data structures
 ### Format: YYYY-MM-DD | filename | change_type | description
 
 ### Recent Changes
+- 2025-06-21 | Principal.php | ENHANCED | Added booted() method with saving event to trim principal names for data consistency
+- 2025-06-21 | PrincipalResource.php | CREATED | Complete Filament resource for Principal brand management with relationship support
+- 2025-06-21 | ProductLineResource.php | CREATED | Complete Filament resource for ProductLine management with bulk actions
+- 2025-06-21 | ProductLinesRelationManager.php | CREATED | Relation manager for managing product lines within principals
+- 2025-06-21 | PrincipalBrandSeeder.php | CREATED | Seeder for 11 major food service brands with 36 product lines
 - 2025-06-21 | PipelineSummaryWidget.php | ADDED | Comprehensive pipeline analytics widget with weighted forecasting and KPI tracking
 - 2025-06-21 | StageVelocityWidget.php | ADDED | Stage velocity analysis widget showing average time spent in each pipeline stage
 - 2025-06-21 | ConversionRateWidget.php | ADDED | Stage conversion rate widget with industry benchmarks and trend analysis

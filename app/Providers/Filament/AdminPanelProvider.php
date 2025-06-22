@@ -33,10 +33,19 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                \App\Filament\Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
+                // New Reporting Widgets
+                \App\Filament\Widgets\SalesOverviewWidget::class,
+                \App\Filament\Widgets\PipelineFunnelWidget::class,
+                \App\Filament\Widgets\RevenueChartWidget::class,
+                \App\Filament\Widgets\OrganizationAnalyticsWidget::class,
+                \App\Filament\Widgets\ActivityFeedWidget::class,
+                \App\Filament\Widgets\PrincipalPerformanceWidget::class,
+                
+                // Existing Widgets
                 \App\Filament\Widgets\PipelineSummaryWidget::class,
                 \App\Filament\Widgets\QuickInteractionWidget::class,
                 \App\Filament\Widgets\StageVelocityWidget::class,

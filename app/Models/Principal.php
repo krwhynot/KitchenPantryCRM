@@ -20,6 +20,14 @@ class Principal extends Model
         'notes',
     ];
 
+    protected static function booted(): void
+    {
+        static::saving(function (Principal $principal) {
+            // Ensure principal name is unique
+            $principal->name = trim($principal->name);
+        });
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
