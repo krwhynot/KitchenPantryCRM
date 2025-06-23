@@ -64,9 +64,17 @@
       "mcp__exa__github_search",
       "Bash(rm:*)",
       "Bash(truncate:*)",
-      "Bash(sqlite3:*)"
+      "Bash(sqlite3:*)",
+      "Bash(ss:*)",
+      "Bash(az webapp list-runtimes:*)",
+      "Bash(cp:*)",
+      "Bash(az webapp deployment source config-local-git:*)",
+      "Bash(az webapp deployment:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "exa",
     "filesystem",

@@ -1,48 +1,85 @@
 #!/bin/bash
 
-# This script configures Apache to serve Laravel from the public directory
-# and handles proper permissions for the storage and bootstrap/cache directories
+# Azure App Service startup script for Laravel application
+echo "Starting PantryCRM Laravel application..."
 
-# Configure Apache to use Laravel's public directory as the web root
-cat > /etc/apache2/sites-available/000-default.conf << 'EOF'
-<VirtualHost *:8080>
-    ServerAdmin webmaster@localhost
-    DocumentRoot /home/site/wwwroot/public
+# Navigate to the application directory
+cd /home/site/wwwroot
 
-    <Directory /home/site/wwwroot/public>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-        <IfModule mod_rewrite.c>
-            <IfModule mod_negotiation.c>
-                Options -MultiViews -Indexes
-            </IfModule>
-            RewriteEngine On
-            # Handle Authorization Header
-            RewriteCond %{HTTP:Authorization} .
-            RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-            # Redirect Trailing Slashes If Not A Folder...
-            RewriteCond %{REQUEST_FILENAME} !-d
-            RewriteCond %{REQUEST_URI} (.+)/$
-            RewriteRule ^ %1 [L,R=301]
-            # Send Requests To Front Controller...
-            RewriteCond %{REQUEST_FILENAME} !-d
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteRule ^ index.php [L]
-        </IfModule>
-    </Directory>
+# Create database directory if it doesn't exist
+mkdir -p database
 
+# Create SQLite database file if it doesn't exist
+if [ ! -f "database/database.sqlite" ]; then
+    echo "Creating SQLite database file..."
+    touch database/database.sqlite
+fi
 
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
+# Set proper permissions
+chmod 777 database
+chmod 666 database/database.sqlite
+
+# Clear and optimize Laravel caches
+echo "Optimizing Laravel application..."
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+
+# Run optimizations
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Run database migrations
+echo "Running database migrations..."
+php artisan migrate --force
+
+# Run database seeders (only if tables are empty)
+echo "Seeding database if needed..."
+php artisan db:seed --force
+
+# Optimize Filament
+echo "Optimizing Filament..."
+php artisan filament:optimize
+
+# Create custom NGINX configuration for Laravel
+echo "Configuring NGINX for Laravel..."
+cat > /home/site/nginx.conf <<'EOF'
+server {
+    listen 8080;
+    listen [::]:8080;
+    root /home/site/wwwroot/public;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+}
 EOF
 
-# Ensure proper permissions for Laravel
-chmod -R 775 /home/site/wwwroot/storage
-chmod -R 775 /home/site/wwwroot/bootstrap/cache
-chown -R www-data:www-data /home/site/wwwroot/storage
-chown -R www-data:www-data /home/site/wwwroot/bootstrap/cache
+# Copy the custom NGINX configuration
+cp /home/site/nginx.conf /etc/nginx/sites-available/default
 
-# The container will start Apache automatically after this script exits
-echo "Laravel startup script completed. Starting Apache..."
+# Restart NGINX
+echo "Restarting NGINX..."
+service nginx restart
+
+echo "PantryCRM startup completed successfully!"

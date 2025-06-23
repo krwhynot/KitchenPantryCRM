@@ -1,0 +1,165 @@
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: pantracrm-app
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  PHP_VERSION: '8.3'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ env.PHP_VERSION }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, pdo_mysql, redis
+        coverage: none
+
+    - name: Check if composer.json exists
+      id: check_files
+      uses: andstor/file-existence-action@v3
+      with:
+        files: 'composer.json'
+
+    - name: Validate composer.json and composer.lock
+      if: steps.check_files.outputs.files_exists == 'true'
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      if: steps.check_files.outputs.files_exists == 'true'
+      run: |
+        composer install --prefer-dist --no-progress --no-suggest --no-dev --optimize-autoloader
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Node.js dependencies
+      run: npm ci
+
+    - name: Build assets
+      run: npm run build
+
+    - name: Create deployment package
+      run: |
+        # Create a clean deployment package
+        mkdir -p deployment-package
+        
+        # Copy application files
+        rsync -av --progress . deployment-package \
+          --exclude node_modules \
+          --exclude .git \
+          --exclude .github \
+          --exclude tests \
+          --exclude .env \
+          --exclude .env.example \
+          --exclude README.md \
+          --exclude .gitignore \
+          --exclude .editorconfig \
+          --exclude .styleci.yml \
+          --exclude phpunit.xml \
+          --exclude webpack.mix.js \
+          --exclude package.json \
+          --exclude package-lock.json \
+          --exclude vite.config.js
+        
+        # Ensure proper directory structure
+        mkdir -p deployment-package/bootstrap/cache
+        mkdir -p deployment-package/storage/app/public
+        mkdir -p deployment-package/storage/framework/{cache,sessions,testing,views}
+        mkdir -p deployment-package/storage/logs
+        
+        # Set proper permissions
+        chmod -R 755 deployment-package/storage
+        chmod -R 755 deployment-package/bootstrap/cache
+
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: deployment-package
+
+  test:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ env.PHP_VERSION }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, redis
+        coverage: xdebug
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install Node.js dependencies
+      run: npm ci
+
+    - name: Build assets
+      run: npm run build
+
+    - name: Copy .env.example to .env
+      run: cp .env.example .env
+
+    - name: Generate application key
+      run: php artisan key:generate
+
+    - name: Create SQLite database
+      run: touch database/database.sqlite
+
+    - name: Run database migrations
+      run: php artisan migrate --force
+
+    - name: Run database seeders
+      run: php artisan db:seed --force
+
+    - name: Run tests
+      run: vendor/bin/phpunit --coverage-text
+
+    - name: Run Filament optimization test
+      run: php artisan filament:optimize

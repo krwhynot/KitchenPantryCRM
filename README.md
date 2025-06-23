@@ -95,18 +95,71 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 - **[Redberry](https://redberry.international/laravel-development)**
 - **[Active Logic](https://activelogic.com)**
 
-## Contributing
+## 🚀 Azure Deployment
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+PantryCRM is optimized for deployment on Azure App Service. We provide comprehensive deployment guides and automation scripts.
 
-## Code of Conduct
+### Quick Deployment
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **Automated Deployment Script**:
+   ```bash
+   ./deploy-to-azure.sh
+   ```
 
-## Security Vulnerabilities
+2. **Manual Azure CLI Deployment**:
+   See [AZURE_DEPLOYMENT_GUIDE.md](AZURE_DEPLOYMENT_GUIDE.md) for detailed instructions.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. **GitHub Actions CI/CD**:
+   Automated deployment pipeline configured in `.github/workflows/azure-deploy.yml`.
 
-## License
+### Deployment Resources
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- 📖 **[Azure Deployment Guide](AZURE_DEPLOYMENT_GUIDE.md)** - Complete step-by-step deployment instructions
+- ✅ **[Production Checklist](PRODUCTION_CHECKLIST.md)** - Pre and post-deployment verification steps
+- 🔧 **[Troubleshooting Guide](TROUBLESHOOTING.md)** - Common deployment issues and solutions
+
+### Azure Service Recommendations
+
+| Component | Recommended Service | Monthly Cost |
+|-----------|-------------------|--------------|
+| **Web App** | App Service (Linux, PHP 8.3) | ~$13-73 |
+| **Database** | Azure Database for MySQL Flexible Server | ~$20-60 |
+| **Cache** | Azure Cache for Redis | ~$15-75 |
+| **Storage** | Azure Blob Storage (optional) | ~$5-20 |
+
+### Environment Variables for Production
+
+Key environment variables for Azure deployment:
+
+```bash
+APP_ENV=production
+APP_DEBUG=false
+DB_CONNECTION=mysql
+DB_HOST=your-mysql-server.mysql.database.azure.com
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+REDIS_HOST=your-redis.redis.cache.windows.net
+FILAMENT_DOMAIN=your-app.azurewebsites.net
+```
+
+See [.env.example](.env.example) for complete configuration options.
+
+## 🤝 Contributing
+
+We welcome contributions to PantryCRM! Please read our contributing guidelines and code of conduct before submitting pull requests.
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes with tests
+4. Run the test suite: `php artisan test`
+5. Submit a pull request
+
+## 🔒 Security
+
+If you discover any security vulnerabilities, please send an email to [security@pantracrm.com](mailto:security@pantracrm.com). All security vulnerabilities will be promptly addressed.
+
+## 📄 License
+
+PantryCRM is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

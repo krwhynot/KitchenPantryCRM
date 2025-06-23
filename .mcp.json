@@ -16,7 +16,7 @@
             "args": [
                 "-y",
                 "@modelcontextprotocol/server-filesystem@latest",
-                "/mnt/r/Projects",
+                "/mnt/c/Projects",
                 "/mnt/c/Users/revadmin/Documents"
             ],
             "env": {
