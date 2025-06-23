@@ -1,53 +1,56 @@
 #!/bin/bash
 
-# Azure App Service startup script for Laravel application
-echo "Starting PantryCRM Laravel application..."
+# Set bash to exit on the first error.
+set -e
 
-# Navigate to the application directory
+# --- Laravel Application Setup ---
+echo "Starting PantryCRM Laravel application setup..."
 cd /home/site/wwwroot
-
-# Install production dependencies
 echo "Installing Composer dependencies..."
 composer install --no-dev --optimize-autoloader --no-interaction
-
-# Create database directory if it doesn't exist
 mkdir -p database
-
-# Create SQLite database file if it doesn't exist
 if [ ! -f "database/database.sqlite" ]; then
     echo "Creating SQLite database file..."
     touch database/database.sqlite
 fi
-
-# Set critical permissions for Laravel
 echo "Setting directory permissions..."
 chmod -R 775 storage bootstrap/cache
 chmod 777 database
 chmod 666 database/database.sqlite
-
-# Clear ALL caches to prevent stale data issues
 echo "Clearing all Laravel caches..."
 php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
 php artisan view:clear
-
-# Rebuild optimized caches
 echo "Building optimized caches..."
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-
-# Run database migrations
 echo "Running database migrations..."
 php artisan migrate --force
-
-# Run database seeders (only if tables are empty)
 echo "Seeding database if needed..."
 php artisan db:seed --force
-
-# Optimize Filament for production
 echo "Optimizing Filament..."
 php artisan filament:optimize
+echo "PantryCRM application setup completed successfully!"
+echo "-------------------------------------------------"
 
-echo "PantryCRM startup completed successfully!"
+# --- Nginx & PHP-FPM Server Startup ---
+echo "Starting server configuration and services..."
+
+# 1. Replace the default Nginx config with our custom one.
+echo "Copying custom Nginx configuration..."
+cp /home/site/wwwroot/nginx-default.conf /etc/nginx/sites-available/default
+
+# 2. Start the PHP-FPM service for the correct PHP version.
+echo "Starting PHP-FPM service..."
+service php8.3-fpm start
+
+# 3. Start the Nginx web server in the foreground.
+# Using 'daemon off;' ensures the script doesn't exit, which would stop the container.
+echo "Starting Nginx service..."
+service nginx start
+
+# 4. Keep the container running by tailing logs
+echo "Startup complete. Tailing Nginx logs to keep container alive."
+tail -f /var/log/nginx/access.log /var/log/nginx/error.log
