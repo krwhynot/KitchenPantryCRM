@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Set bash to exit on the first error.
+# Set bash to exit on the first error, but be more robust
 set -e
+set -o pipefail
+
+# Add logging
+exec 1> >(logger -s -t STARTUP_SCRIPT)
+exec 2>&1
 
 # --- Laravel Application Setup ---
 echo "Starting PantryCRM Laravel application setup..."
