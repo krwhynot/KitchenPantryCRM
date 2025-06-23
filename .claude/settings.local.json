@@ -71,7 +71,10 @@
       "Bash(az webapp deployment source config-local-git:*)",
       "Bash(az webapp deployment:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(az webapp log tail:*)",
+      "Bash(git remote:*)",
+      "Bash(true)"
     ]
   },
   "enableAllProjectMcpServers": true,
