@@ -11,6 +11,16 @@ exec 2>&1
 # --- Laravel Application Setup ---
 echo "Starting PantryCRM Laravel application setup..."
 cd /home/site/wwwroot
+
+# Copy environment configuration
+echo "Setting up environment configuration..."
+if [ -f ".env.azure" ]; then
+    cp .env.azure .env
+    echo "Copied .env.azure to .env"
+else
+    echo "Warning: .env.azure not found"
+fi
+
 echo "Installing Composer dependencies..."
 composer install --no-dev --optimize-autoloader --no-interaction
 mkdir -p database
