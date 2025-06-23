@@ -12,6 +12,18 @@ exec 2>&1
 echo "Starting PantryCRM Laravel application setup..."
 cd /home/site/wwwroot
 
+# --- Custom PHP Configuration ---
+echo "Applying custom PHP configuration..."
+PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.d/
+CUSTOM_PHP_INI_PATH=/home/site/wwwroot/.azure/config/php/custom.ini
+
+if [ -f "$CUSTOM_PHP_INI_PATH" ]; then
+    cp "$CUSTOM_PHP_INI_PATH" "$PHP_INI_SCAN_DIR"
+    echo "Custom PHP INI applied. SQLite extensions should now be enabled."
+else
+    echo "Warning: Custom PHP INI file not found at $CUSTOM_PHP_INI_PATH"
+fi
+
 # Copy environment configuration
 echo "Setting up environment configuration..."
 if [ -f ".env.azure" ]; then
