@@ -7,15 +7,6 @@ set -e
 echo "--- Starting Laravel Application Setup ---"
 cd /home/site/wwwroot
 
-# --- Nginx Configuration ---
-# This is the critical step: Overwrite the default Nginx config
-# and then gracefully reload the service to apply the changes.
-echo "Copying custom Nginx configuration to /etc/nginx/sites-enabled/default..."
-cp /home/site/wwwroot/nginx.conf /etc/nginx/sites-enabled/default
-
-echo "Reloading Nginx to apply new configuration..."
-nginx -s reload
-
 # Copy environment file if it exists
 if [ -f ".env.azure" ]; then
     echo "Found .env.azure, copying to .env"
@@ -47,4 +38,5 @@ php artisan view:clear
 php artisan filament:optimize
 
 echo "--- Laravel Application Setup Completed ---"
-# The Azure platform will now start Nginx and PHP-FPM using our custom config.
+# The Azure platform will find the nginx.conf in the nginx/ directory
+# and will start Nginx and PHP-FPM automatically.
