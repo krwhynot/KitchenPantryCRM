@@ -35,15 +35,8 @@ fi
 
 echo "Installing Composer dependencies..."
 composer install --no-dev --optimize-autoloader --no-interaction
-mkdir -p database
-if [ ! -f "database/database.sqlite" ]; then
-    echo "Creating SQLite database file..."
-    touch database/database.sqlite
-fi
 echo "Setting directory permissions..."
 chmod -R 775 storage bootstrap/cache
-chmod 777 database
-chmod 666 database/database.sqlite
 echo "Clearing application caches (excluding config)..."
 php artisan cache:clear
 php artisan route:clear
