@@ -44,13 +44,11 @@ echo "Setting directory permissions..."
 chmod -R 775 storage bootstrap/cache
 chmod 777 database
 chmod 666 database/database.sqlite
-echo "Clearing all Laravel caches..."
-php artisan config:clear
+echo "Clearing application caches (excluding config)..."
 php artisan cache:clear
 php artisan route:clear
 php artisan view:clear
-echo "Building optimized caches..."
-php artisan config:cache
+echo "Building optimized caches (excluding config)..."
 php artisan route:cache
 php artisan view:cache
 echo "Running database migrations..."
