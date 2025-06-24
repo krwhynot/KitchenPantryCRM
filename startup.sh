@@ -9,9 +9,12 @@ cd /home/site/wwwroot
 
 # --- Nginx Configuration ---
 # This is the critical step: Overwrite the default Nginx config
-# with our custom one before the platform starts the Nginx service.
+# and then gracefully reload the service to apply the changes.
 echo "Copying custom Nginx configuration to /etc/nginx/sites-enabled/default..."
 cp /home/site/wwwroot/nginx.conf /etc/nginx/sites-enabled/default
+
+echo "Reloading Nginx to apply new configuration..."
+nginx -s reload
 
 # Copy environment file if it exists
 if [ -f ".env.azure" ]; then
