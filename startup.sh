@@ -74,10 +74,6 @@ echo "Starting PHP-FPM service..."
 service php8.3-fpm start
 
 # 3. Start the Nginx web server in the foreground.
-# Using 'daemon off;' ensures the script doesn't exit, which would stop the container.
-echo "Starting Nginx service..."
-service nginx start
-
-# 4. Keep the container running by tailing logs
-echo "Startup complete. Tailing Nginx logs to keep container alive."
-tail -f /var/log/nginx/access.log /var/log/nginx/error.log
+# This is the primary process that will keep the container running.
+echo "Starting Nginx in foreground mode..."
+nginx -g 'daemon off;'
