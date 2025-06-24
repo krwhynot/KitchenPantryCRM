@@ -74,7 +74,11 @@
       "Bash(git commit:*)",
       "Bash(az webapp log tail:*)",
       "Bash(git remote:*)",
-      "Bash(true)"
+      "Bash(true)",
+      "Bash(tar:*)",
+      "Bash(az webapp log download:*)",
+      "Bash(az webapp config show:*)",
+      "Bash(az webapp config appsettings list:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

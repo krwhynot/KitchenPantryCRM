@@ -1,0 +1,1 @@
+2025-06-23T21:33:57  Startup Request, url: /pantracrm-fixed.git/info/refs?service=git-receive-pack, method: GET, type: request, pid: 820,1,5, ScmType: LocalGit

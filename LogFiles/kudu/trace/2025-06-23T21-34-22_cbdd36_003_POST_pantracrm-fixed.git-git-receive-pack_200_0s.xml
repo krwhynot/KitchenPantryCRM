@@ -1,0 +1,15 @@
+<step title="Incoming Request" date="2025-06-23T21:34:22.035" instance="cbdd36" url="/pantracrm-fixed.git/git-receive-pack" method="POST" type="request" pid="820,1,5" Accept="application/x-git-receive-pack-result" Host="pantracrm-fixed.scm.azurewebsites.net" User-Agent="git/2.34.1" Authorization="Bas..." Content-Type="application/x-git-receive-pack-request" Content-Length="4" X-ARR-LOG-ID="25187ea0-aa25-4190-89d4-fb80d44ba89b" CLIENT-IP="47.220.139.42:65250" X-SITE-DEPLOYMENT-ID="pantracrm-fixed" WAS-DEFAULT-HOSTNAME="pantracrm-fixed.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/pantracrm-fixed.git/git-receive-pack" X-Client-IP="47.220.139.42" X-Client-Port="65250" >
+  <step title="Cleanup Xml Logs" date="2025-06-23T21:34:22.038" /><!-- duration: 5ms -->
+  <step title="RpcService.ReceivePack" date="2025-06-23T21:34:22.059" >
+    <step title="Executing external process" date="2025-06-23T21:34:22.071" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 24ms -->
+    <step title="Assuming git repository at /home/site/repository" date="2025-06-23T21:34:22.097" /><!-- duration: 2ms -->
+    <step title="Acquiring Deployment Lock" date="2025-06-23T21:34:22.103" /><!-- duration: 2ms -->
+    <step title="Acquired Deployment Lock" date="2025-06-23T21:34:22.122" /><!-- duration: 3ms -->
+    <step title="Creating temporary deployment" date="2025-06-23T21:34:22.128" /><!-- duration: 51ms -->
+    <step title="GitExeServer.Receive" date="2025-06-23T21:34:22.181" >
+      <step title="Executing external process" date="2025-06-23T21:34:22.387" type="process" path="git" arguments="receive-pack --stateless-rpc &quot;/home/site/repository&quot;" /><!-- duration: 45ms -->
+    </step><!-- duration: 254ms -->
+    <step title="Releasing Deployment Lock" date="2025-06-23T21:34:22.471" /><!-- duration: 2ms -->
+  </step><!-- duration: 421ms -->
+  <step title="Outgoing response" date="2025-06-23T21:34:22.483" type="response" statusCode="200" statusText="OK" /><!-- duration: 2ms -->
+</step><!-- duration: 451ms -->

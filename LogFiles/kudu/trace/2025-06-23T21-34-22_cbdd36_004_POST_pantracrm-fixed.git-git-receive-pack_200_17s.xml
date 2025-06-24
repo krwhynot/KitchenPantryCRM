@@ -1,0 +1,14 @@
+<step title="Incoming Request" date="2025-06-23T21:34:22.617" instance="cbdd36" url="/pantracrm-fixed.git/git-receive-pack" method="POST" type="request" pid="820,1,5" Accept="application/x-git-receive-pack-result" Host="pantracrm-fixed.scm.azurewebsites.net" User-Agent="git/2.34.1" Accept-Encoding="deflate, gzip, br, zstd" Authorization="Bas..." Content-Type="application/x-git-receive-pack-request" Transfer-Encoding="chunked" X-ARR-LOG-ID="4e47bf26-0e41-47a2-9f4b-04794c79db25" CLIENT-IP="47.220.139.42:65250" X-SITE-DEPLOYMENT-ID="pantracrm-fixed" WAS-DEFAULT-HOSTNAME="pantracrm-fixed.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/pantracrm-fixed.git/git-receive-pack" X-Client-IP="47.220.139.42" X-Client-Port="65250" >
+  <step title="RpcService.ReceivePack" date="2025-06-23T21:34:22.632" >
+    <step title="Executing external process" date="2025-06-23T21:34:22.638" type="process" path="git" arguments="rev-parse --git-dir" /><!-- duration: 20ms -->
+    <step title="Assuming git repository at /home/site/repository" date="2025-06-23T21:34:22.661" /><!-- duration: 2ms -->
+    <step title="Acquiring Deployment Lock" date="2025-06-23T21:34:22.669" /><!-- duration: 9ms -->
+    <step title="Acquired Deployment Lock" date="2025-06-23T21:34:22.709" /><!-- duration: 2ms -->
+    <step title="Creating temporary deployment" date="2025-06-23T21:34:22.713" /><!-- duration: 44ms -->
+    <step title="GitExeServer.Receive" date="2025-06-23T21:34:22.759" >
+      <step title="Executing external process" date="2025-06-23T21:34:22.761" type="process" path="git" arguments="receive-pack --stateless-rpc &quot;/home/site/repository&quot;" /><!-- duration: 16791ms -->
+    </step><!-- duration: 16799ms -->
+    <step title="Releasing Deployment Lock" date="2025-06-23T21:34:39.599" /><!-- duration: 2ms -->
+  </step><!-- duration: 16973ms -->
+  <step title="Outgoing response" date="2025-06-23T21:34:39.608" type="response" statusCode="200" statusText="OK" /><!-- duration: 2ms -->
+</step><!-- duration: 16995ms -->

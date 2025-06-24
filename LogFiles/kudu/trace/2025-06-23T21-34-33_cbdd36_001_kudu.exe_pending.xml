@@ -1,0 +1,14 @@
+<step title="Executing external process" date="2025-06-23T21:34:33.956" instance="cbdd36" type="process" path="kudu.exe" arguments="/home/site /opt/Kudu/msbuild" >
+  <step title="Cleanup Xml Logs" date="2025-06-23T21:34:34.047" /><!-- duration: 19ms -->
+  <step title="Deployment timer started" date="2025-06-23T21:34:34.408" >
+    <step title="Executing external process" date="2025-06-23T21:34:34.481" type="process" path="git" arguments="log -n 1 master --" >
+      <step title="Process dump" date="2025-06-23T21:34:35.064" exitCode="128" type="processOutput" /><!-- duration: 29ms -->
+    </step><!-- duration: 623ms -->
+    <step title="Error occurred" date="2025-06-23T21:34:36.700" type="error" text="One or more errors occurred. (The current deployment branch is &apos;master&apos;, but nothing has been pushed to it)" stackTrace="   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean )
+   at System.Threading.Tasks.Task.Wait(Int32 , CancellationToken )
+   at System.Threading.Tasks.Task.Wait()
+   at Kudu.Console.Program.PerformDeploy(String appRoot, String wapTargets, String deployer, String lockPath, IEnvironment env, IDeploymentSettingsManager settingsManager, TraceLevel level, ITracer tracer, ITraceFactory traceFactory, IOperationLock deploymentLock, IBuildService buildService) in /tmp/KuduLite/Kudu.Console/Program.cs:line 190" innerText="The current deployment branch is &apos;master&apos;, but nothing has been pushed to it" innerStackTrace="   at Kudu.Core.Deployment.DeploymentManager.DeployAsync(IRepository repository, ChangeSet changeSet, String deployer, Boolean clean, DeploymentInfoBase deploymentInfo, Boolean needFileUpdate, Boolean fullBuildByDefault) in /tmp/KuduLite/Kudu.Core/Deployment/DeploymentManager.cs:line 208
+   at Kudu.Console.Program.&lt;&gt;c__DisplayClass1_0.&lt;&lt;PerformDeploy&gt;b__0&gt;d.MoveNext() in /tmp/KuduLite/Kudu.Console/Program.cs:line 183" /><!-- duration: 29ms -->
+    <step title="Executing external process" date="2025-06-23T21:34:36.839" type="process" path="git" arguments="log -n 1 master --" >
+      <step title="Process dump" date="2025-06-23T21:34:37.011" exitCode="128" type="processOutput" /><!-- duration: 2ms -->
+    </step><!-- duration: 181ms -->
